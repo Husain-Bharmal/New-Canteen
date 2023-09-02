@@ -74,7 +74,7 @@ const OrderCard = ({
         ) : order?.paymentType === "online" ? (
           <StripeButton price={order?.totalPrice} id={order?._id} />
         ) : (
-          "You have to in Cash"
+          "You have to pay in Cash"
         ))
       )}
       {user?.isAdmin && (

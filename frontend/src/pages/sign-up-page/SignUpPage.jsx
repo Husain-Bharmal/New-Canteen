@@ -18,7 +18,7 @@ const SignUpPage = ({ registerUser, isAuthenticated, setAlert }) => {
     role: "",
   });
 
-  const { name, email, password, confirmPassword, branch, role } = formData;
+  const { name, email, password, confirmPassword, branch } = formData;
 
   const onChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -77,12 +77,10 @@ const SignUpPage = ({ registerUser, isAuthenticated, setAlert }) => {
             <br />
             <select name="branch" value={branch} onChange={onChange} id="cars">
               <option value="null">Branch </option>
-              <option value="COMPUTER">CMPN</option>
+              <option value="COMPUTER">Computer</option>
               <option value="IT">IT</option>
               <option value="EXTC">EXTC</option>
-              <option value="ETRX">ETRX</option>
-              <option value="MECHANICAL">MECHANICAL</option>
-              <option value="CIVIL">CIVIL</option>
+              <option value="ETRX">AIDS</option>
             </select>
             <br />
 

@@ -39,3 +39,20 @@
   font-size: 17px;
   font-weight: bold;
 }
+
+@media screen and (max-width: 768px) {
+  .navbar {
+    justify-content: center; /* Center align links on smaller screens */
+    flex-wrap: wrap; /* Allow links to wrap to the next line if necessary */
+  }
+
+  .link {
+    font-size: 20px; /* Reduce link font size */
+    padding: 10px 15px; /* Adjust link padding */
+    margin: 5px 10px; /* Adjust link margin */
+  }
+
+  .btn {
+    padding: 5px 15px; /* Adjust button padding */
+  }
+}

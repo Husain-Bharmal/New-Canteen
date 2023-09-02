@@ -79,7 +79,7 @@ const AddFoodPage = ({ isAuthenticated, loading, addFoodItem, history }) => {
               onChange={(e) => setImage(e.target.files[0])}
             />
             <br />
-            <button>Submit</button>
+            <button type="submit" className="submitbtn">Submit</button>
           </form>
         </div>
         <div>

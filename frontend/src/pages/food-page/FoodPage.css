@@ -9,3 +9,27 @@
   grid-gap: 20px;
   margin: 50px 130px;
 }
+
+@media screen and (min-width: 768px) {
+  .category-title {
+    font-size: 36px;
+  }
+
+  .food-page {
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 20px;
+    margin: 30px;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .category-title {
+    font-size: 50px;
+  }
+
+  .food-page {
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 20px;
+    margin: 50px 130px;
+  }
+}

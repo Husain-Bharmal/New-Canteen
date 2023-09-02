@@ -44,7 +44,7 @@ const AddFoodPage = ({
 
   return (
     <div className="root">
-      {loading && <Loader />}
+      {/* {loading && <Loader />} */}
       <div className="add-food-div">
         <div>
           <h1>Edit food item</h1>

@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
-const UserSchema = new mongoose.Schema({
+const { Schema } = mongoose;
+
+const UserSchema = new Schema({
   name: {
     type: String,
     required: true,
@@ -15,7 +17,7 @@ const UserSchema = new mongoose.Schema({
   branch: {
     type: String,
     required: true,
-    enum: ["COMPUTER","IT", "EXTC", "ETRX","MECHANICAL", "CIVIL" ]
+    enum: ["COMPUTER","IT", "EXTC", "AIDS" ]
   },
   role:{
     type:String,
