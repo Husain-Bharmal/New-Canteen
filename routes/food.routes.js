@@ -112,7 +112,7 @@ router.get("/search/:food", auth, async (req, res) => {
     });
     res.json({ data: food });
   } catch (error) {
-    res.status(500).json(errpr.message);
+    res.status(500).json(error.message);
   }
 });
 
