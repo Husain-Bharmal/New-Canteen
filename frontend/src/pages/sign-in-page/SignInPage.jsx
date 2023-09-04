@@ -6,6 +6,7 @@ import { AiFillLock } from "react-icons/ai";
 
 import "./SignInPage.css";
 
+
 const SignInPage = ({ isAuthenticated, loginUser }) => {
   const [formData, setFormData] = useState({
     email: "",
@@ -25,21 +26,23 @@ const SignInPage = ({ isAuthenticated, loginUser }) => {
     return <Redirect to="/" />;
   }
   return (
-    <div className="signin-root">
-      <div className="signin-div">
-        <div className="signin-form">
-          <AiFillLock className="signin-icon" />
+    <div class="Pura_signin">
 
-          <h1>Signin to continue</h1>
-          <form onSubmit={onSubmit}>
-            <input
+      <div className="signin-root">
+        <div className="signin-div">
+          <div className="signin-form">
+            <AiFillLock className="signin-icon" />
+            
+            <h1>Signin to continue</h1>
+            <form onSubmit={onSubmit}>
+              <input
               type="email"
               name="email"
               onChange={onChange}
               placeholder="Email"
-            />
-            <br />
-            <input
+              />
+              <br />
+              <input
               type="password"
               name="password"
               onChange={onChange}
@@ -54,10 +57,11 @@ const SignInPage = ({ isAuthenticated, loginUser }) => {
         </div>
       </div>
     </div>
-  );
-};
-
-const mapStateToProps = (state) => ({
+  </div>
+    );
+  };
+  
+  const mapStateToProps = (state) => ({
   isAuthenticated: state.auth.isAuthenticated,
 });
 

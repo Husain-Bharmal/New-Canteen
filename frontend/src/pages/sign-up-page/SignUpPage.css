@@ -1,9 +1,19 @@
 @import url("https://fonts.googleapis.com/css2?family=Nunito:wght@200&family=Poppins:wght@300&family=Ubuntu:wght@300&display=swap");
 
-.root {
-  background: #ffa9a6;
+.root1{
+  /* background: #ffa9a6; */
+  padding: 40px 0px;
   height: 100vh;
 }
+
+.Pura_signup{
+  background: url("../../assets/Singin.jpg") no-repeat ; 
+
+  background-size: cover;
+
+}
+
+
 .signup-div {
   padding-top: 0;
   display: flex;
@@ -14,11 +24,11 @@
 
 .signup-form {
   background: white;
-  padding: 30px 150px;
+  padding: 30px 100px;
   text-align: center;
   border-radius: 20px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-  margin-bottom: 100px;
+  margin-bottom: 50px;
 }
 
 .signup-form h1 {

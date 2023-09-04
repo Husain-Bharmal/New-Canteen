@@ -11,7 +11,7 @@ const Navbar = ({
 }) => {
   const LoggedOut = (
     <div>
-      <Link to="/signin" className="link btn">
+      <Link to="/signin" className="link">
         SignIn
       </Link>
       <Link to="/signup" className="link">
@@ -21,7 +21,9 @@ const Navbar = ({
   );
 
   const LoggedInUser = (
+      
     <div>
+      
       <Link to="/signin" className="link">
         Home
       </Link>
@@ -33,10 +35,11 @@ const Navbar = ({
       <Link to="/dashboard" className="link">
         Dashboard
       </Link>
-      <button className="link btn" onClick={() => logoutUser()} href="#!">
+      <button className="link btn logOut" onClick={() => logoutUser()} href="#!">
         Logout
       </button>
     </div>
+
   );
   const LoggedInAdmin = (
     <div>
@@ -49,7 +52,7 @@ const Navbar = ({
       <Link to="/dashboard" className="link">
         Dashboard
       </Link>
-      <Link className="link btn" onClick={() => logoutUser()}>
+      <Link className="link btn logOut" onClick={() => logoutUser()}>
         Logout
       </Link>
     </div>

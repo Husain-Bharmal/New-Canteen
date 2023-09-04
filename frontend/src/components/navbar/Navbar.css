@@ -2,9 +2,14 @@
 
 .navbar {
   display: flex;
-  justify-content: flex-end;
+  justify-content: flex-start;
   padding: 10px 0;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  /* box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; */
+  /* background-color: ; */
+  position: relative;
+  /* width: 100%; */
+  background-color: rgb(132, 246, 236);
+
   font-family: "Poppins", sans-serif;
 }
 
@@ -12,10 +17,18 @@
   text-decoration: none;
   padding: 10px 20px;
   font-size: 25px;
-  color: #ff2a2a;
+  /* color: #ff2a2a; */
+  color: black;
+
   font-weight: 400;
   margin: 10px 0;
 }
+
+.logOut{
+  /* float: right; */
+  justify-content: flex-end;
+}
+
 
 .btn {
   background: #ff2a2a;
@@ -23,8 +36,11 @@
   border-radius: 5px;
   padding: 5px 40px;
   border: none;
+  position: absolute;
+  right: 0px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   margin-right: 10px;
+  margin-top: 0px;
 }
 
 .link:hover {

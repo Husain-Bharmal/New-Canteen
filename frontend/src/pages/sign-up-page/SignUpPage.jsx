@@ -37,7 +37,9 @@ const SignUpPage = ({ registerUser, isAuthenticated, setAlert }) => {
     return <Redirect to="/" />;
   }
   return (
-    <div className="root">
+    <div className="Pura_signup">
+
+    <div className="root1">
       <div className="signup-div">
         <div className="signup-form">
           <MdAccountCircle className="sign-up-icon" />
@@ -49,7 +51,7 @@ const SignUpPage = ({ registerUser, isAuthenticated, setAlert }) => {
               value={name}
               onChange={onChange}
               placeholder="Name"
-            />
+              />
             <br></br>
             <input
               type="email"
@@ -57,7 +59,7 @@ const SignUpPage = ({ registerUser, isAuthenticated, setAlert }) => {
               value={email}
               onChange={onChange}
               placeholder="Email"
-            />
+              />
             <br />
             <input
               type="password"
@@ -65,7 +67,7 @@ const SignUpPage = ({ registerUser, isAuthenticated, setAlert }) => {
               value={password}
               onChange={onChange}
               placeholder="Password"
-            />
+              />
             <br />
             <input
               type="password"
@@ -73,7 +75,7 @@ const SignUpPage = ({ registerUser, isAuthenticated, setAlert }) => {
               placeholder="Confirm Password"
               value={confirmPassword}
               onChange={onChange}
-            />
+              />
             <br />
             <select name="branch" value={branch} onChange={onChange} id="cars">
               <option value="null">Branch </option>
@@ -91,7 +93,7 @@ const SignUpPage = ({ registerUser, isAuthenticated, setAlert }) => {
                 value="teacher"
                 onChange={() => setFormData({ ...formData, role: "teacher" })}
                 name="role"
-              />
+                />
               <label for="teacher">Teacher</label>
 
               <input
@@ -100,7 +102,7 @@ const SignUpPage = ({ registerUser, isAuthenticated, setAlert }) => {
                 name="role"
                 value="student"
                 onChange={() => setFormData({ ...formData, role: "student" })}
-              />
+                />
               <label for="student">Student</label>
             </div>
 
@@ -114,6 +116,7 @@ const SignUpPage = ({ registerUser, isAuthenticated, setAlert }) => {
         </div>
       </div>
     </div>
+</div>
   );
 };
 

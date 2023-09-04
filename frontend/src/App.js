@@ -41,7 +41,7 @@ function App() {
           <PrivateRoute exact path="/food/:food" component={FoodPage} />
           <AdminRoute exact path="/edit/:id" component={EditFoodPage} />
         </Switch>
-        <Footer />
+        <Footer/>
       </BrowserRouter>
     </Provider>
   );

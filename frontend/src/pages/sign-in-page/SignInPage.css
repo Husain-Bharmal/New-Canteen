@@ -1,5 +1,7 @@
 .signin-root {
-  background: #ffa9a6;
+  /* background: #ffa9a6; */
+  /* background: no-repeat; */
+  /* opacity: 0.5; */
   height: 100vh;
 }
 .signin-div {
@@ -9,6 +11,14 @@
   flex-direction: column;
   align-items: center;
 }
+
+.Pura_signin{
+
+  background: url("../../assets/Singin.jpg") no-repeat ; 
+  background-size: cover;
+
+}
+
 
 .signin-form {
   background: white;
