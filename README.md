@@ -14,20 +14,3 @@ Frontend is buils using ReactJs. I've used Redux for global state management.
 * Order confirmed by admin, then user can go for payment
 * Payment has to be done either online or offline
 * For online payment, I've used stripe button
-
-
-## Working 
-![](https://imgur.com/y5XArvG.gif)
-![](https://imgur.com/DihoPQb.gif)
-![](https://imgur.com/MPer2BU.gif)
-
-![](https://i.imgur.com/DKRfYGe.png)
-![](https://i.imgur.com/oHcosDT.png)
-![](https://i.imgur.com/QetqfL3.png)
-![](https://i.imgur.com/IGfgyhc.png)
-![](https://i.imgur.com/sPqoDie.png)
-![](https://i.imgur.com/JNlHpsu.png)
-## Contributors
-
-[Unnati Bamania](https://github.com/unnati2000)
-
