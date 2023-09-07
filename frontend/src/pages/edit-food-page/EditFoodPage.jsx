@@ -4,7 +4,7 @@ import Loader from "../../components/loader/Loader";
 import { editFoodItem, getSingleFoodItem } from "../../redux/food/food.actions";
 import "./EditFoodPage.css";
 
-const AddFoodPage = ({
+const EditFoodPage = ({
   isAuthenticated,
   loading,
   getSingleFoodItem,
@@ -13,22 +13,32 @@ const AddFoodPage = ({
   food,
   editFoodItem,
 }) => {
-  const [foodType, setFoodType] = useState("");
-
-  const [name, setName] = useState("");
-  const [price, setPrice] = useState("");
-  const [quantity, setQuantity] = useState("");
-
-  const [image, setImage] = useState("");
+  const [formData, setFormData] = useState({
+    foodType: "",
+    name: "",
+    price: "",
+    quantity: "",
+    image: "",
+  });
 
   useEffect(() => {
     getSingleFoodItem(match.params.id);
-    setFoodType(food?.foodType);
-    setName(food?.name);
-    setPrice(food?.price);
-    setQuantity(food?.quantity);
-    setImage(food?.image);
-  }, [getSingleFoodItem, match, food]);
+  }, [getSingleFoodItem, match.params.id]);
+
+  useEffect(() => {
+    // Set form data when the food data is available
+    if (food) {
+      setFormData({
+        foodType: food.foodType || "",
+        name: food.name || "",
+        price: food.price || "",
+        quantity: food.quantity || "",
+        image: food.image || "",
+      });
+    }
+  }, [food]);
+
+  const { foodType, name, price, quantity, image } = formData;
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -44,11 +54,10 @@ const AddFoodPage = ({
 
   return (
     <div className="root">
-      {/* {loading && <Loader />} */}
+      {loading && <Loader />}
       <div className="add-food-div">
         <div>
           <h1>Edit food item</h1>
-
           <form onSubmit={onSubmit}>
             <input
               type="text"
@@ -56,7 +65,7 @@ const AddFoodPage = ({
               className="input"
               placeholder="Name"
               value={name}
-              onChange={(e) => setName(e.target.value)}
+              onChange={(e) => setFormData({ ...formData, name: e.target.value })}
             />
             <br />
             <input
@@ -65,7 +74,7 @@ const AddFoodPage = ({
               className="input"
               placeholder="Price"
               value={price}
-              onChange={(e) => setPrice(e.target.value)}
+              onChange={(e) => setFormData({ ...formData, price: e.target.value })}
             />
             <br />
             <input
@@ -74,15 +83,17 @@ const AddFoodPage = ({
               className="input"
               placeholder="Quantity"
               value={quantity}
-              onChange={(e) => setQuantity(e.target.value)}
+              onChange={(e) =>
+                setFormData({ ...formData, quantity: e.target.value })
+              }
             />
             <br />
             <select
               name="foodType"
               value={foodType}
-              onChange={(e) => setFoodType(e.target.value)}
+              onChange={(e) => setFormData({ ...formData, foodType: e.target.value })}
             >
-              <option value="null">Cateogry </option>
+              <option value="null">Category</option>
               <option value="breakfast">Breakfast</option>
               <option value="indian">Indian</option>
               <option value="chinese">Chinese</option>
@@ -92,7 +103,9 @@ const AddFoodPage = ({
             <input
               type="file"
               name="image"
-              onChange={(e) => setImage(e.target.files[0])}
+              onChange={(e) =>
+                setFormData({ ...formData, image: e.target.files[0] })
+              }
             />
             <br />
             <button>Submit</button>
@@ -101,7 +114,11 @@ const AddFoodPage = ({
         <div>
           <img
             alt="img"
-            src={typeof image === "object" ? URL.createObjectURL(image) : image}
+            src={
+              typeof image === "object"
+                ? URL.createObjectURL(image)
+                : image
+            }
           />
         </div>
       </div>
@@ -116,5 +133,5 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps, { getSingleFoodItem, editFoodItem })(
-  AddFoodPage
+  EditFoodPage
 );
