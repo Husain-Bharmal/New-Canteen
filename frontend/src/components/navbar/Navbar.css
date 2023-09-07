@@ -1,32 +1,15 @@
 @import url("https://fonts.googleapis.com/css2?family=Nunito:wght@200&family=Poppins:wght@300&family=Ubuntu:wght@300&display=swap");
 
 
-/* .navbar{
-  background-color: rgb(223, 114, 223);
-  font-size: 18px;
-  font-weight: bold;
-  height: 60px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: sticky;
-  top: 0px;
-  z-index: 20;
-} */
-
 .navbar {
   display: flex;
   justify-content: flex-start;
   padding: 15px 0;
-  /* box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; */
-  /* background-color: ; */
   position: relative;
-  /* width: 100%; */
   background-color: rgb(132, 246, 236);
-
   font-family: "Poppins", sans-serif;
+  height: 4%;
 }
-
 
 
 .hamburger-menu {
@@ -45,15 +28,12 @@
   text-decoration: none;
   padding: 10px 20px;
   font-size: 25px;
-  /* color: #ff2a2a; */
   color: black;
-
   font-weight: 400;
   margin: 10px 0;
 }
 
 .logOut{
-  /* float: right; */
   justify-content: flex-end;
 }
 
@@ -85,35 +65,42 @@
   font-weight: bold;
 }
 
+.navbarshow{
+  justify-content: center; 
+  flex-wrap: wrap; 
+  flex-direction: column;
+}
+
+.nav-itemsshow{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
 
 @media screen and (max-width: 768px) {
+
   .navbar {
-    justify-content: center; 
+    padding:3vh;
     flex-wrap: wrap; 
     flex-direction: column;
   }
 
-  .smallDevice{
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
+  .nav-items{
+    display: none;
+  }
+
+  .hamburger-menu {
+    display: block;
+    position: absolute;
+    right: 15px;
+    margin-top: -1vh;
   }
 
   .link {
     font-size: 20px; 
     padding: 10px 15px; 
     margin: 5px 10px; 
-  }
-  .hamburger{
-    display: flex;
-    flex: end;
-  }
-  .hamburger p{
-    display:flex;
-    border: 1px solid black;
-    width: 60px;
-
   }
   .btn {
     padding: 5px 15px; 

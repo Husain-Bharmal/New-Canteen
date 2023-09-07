@@ -1,16 +1,22 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { logoutUser } from "../../redux/auth/auth.actions";
 import "./Navbar.css";
+import { useState } from "react";
+
+
 
 const Navbar = ({
+  
   auth: { isAuthenticated, loading, user },
   logoutUser,
   cart,
 }) => {
+
+  const [toggle , setToggle] = useState(false)
+
   const LoggedOut = (
-    <div className="smallDevice">
+    <div  className={`nav-items${toggle ? 'show navbarshow':''}`}>
       <Link to="/signin" className="link">
         SignIn
       </Link>
@@ -22,7 +28,7 @@ const Navbar = ({
 
   const LoggedInUser = (
       
-    <div className="smallDevice">
+    <div  className={`nav-items${toggle ? 'show navbarshow':''}`}>
       
       <Link to="/signin" className="link">
         Home
@@ -42,7 +48,7 @@ const Navbar = ({
 
   );
   const LoggedInAdmin = (
-    <div className="smallDevice">
+    <div  className={`nav-items${toggle ? 'show navbarshow':''}`}>
       <Link to="/signin" className="link">
         Home
       </Link>
@@ -58,13 +64,22 @@ const Navbar = ({
     </div>
   );
   return (
+  <>  
     <div className="navbar">
+      <div className="hamburger-menu" onClick={()=>{setToggle((prev) => !prev); console.log("button Clicked!")}} >
+            <div className="bar"></div>
+            <div className="bar"></div>
+            <div className="bar"></div>
+        </div>
+        <div className="items">
       {isAuthenticated & !loading
         ? user?.isAdmin
           ? LoggedInAdmin
           : LoggedInUser
         : LoggedOut}
-    </div>
+        </div>
+      </div>
+  </>
   );
 };
 
