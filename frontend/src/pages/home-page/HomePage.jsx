@@ -3,6 +3,7 @@ import "./HomePage.css";
 import { Link } from "react-router-dom";
 import cofee from "../../assets/cofee.png";
 import samosa from "../../assets/samosa.png";
+import Footer from "../../components/footer/Footer";
 import dosa from "../../assets/dosa.png";
 import noodles from "../../assets/noodles.png";
 import { getAllFoodItems } from "../../redux/food/food.actions";
@@ -70,6 +71,7 @@ const Homepage = () => {
         </div>
       </div>
       <div></div>
+      <Footer/>
     </div>
   );
 };

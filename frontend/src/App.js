@@ -6,11 +6,11 @@ import setAuthToken from "./utils/setAuthToken";
 import Homepage from "./pages/home-page/HomePage";
 import SignInPage from "./pages/sign-in-page/SignInPage";
 import SignUpPage from "./pages/sign-up-page/SignUpPage";
-import Footer from "./components/footer/Footer";
+// import Footer from "./components/footer/Footer";
 import AddFoodPage from "./pages/add-food-page/AddFoodPage";
 import FoodPage from "./pages/food-page/FoodPage";
 import CartPage from "./pages/cart/CartPage";
-import Navbar from "./components/navbar/Navbar";
+import Navbar from "./components/navbar/Narbar";
 import { loadUser } from "./redux/auth/auth.actions";
 import Dashboard from "./pages/dashboard/Dashboard";
 import PrivateRoute from "./components/private-component/PrivateComponent";
@@ -41,7 +41,7 @@ function App() {
           <PrivateRoute exact path="/food/:food" component={FoodPage} />
           <AdminRoute exact path="/edit/:id" component={EditFoodPage} />
         </Switch>
-        <Footer/>
+        {/* <Footer/> */}
       </BrowserRouter>
     </Provider>
   );

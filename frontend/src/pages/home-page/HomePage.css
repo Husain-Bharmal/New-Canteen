@@ -6,6 +6,12 @@
   height: 120vh;
 }
 
+.landing-page-div img{
+  height: 100vh;
+  width: 100vh;
+
+}
+
 .landing-page-header {
   display: flex;
   justify-content: center;
@@ -62,7 +68,7 @@
 .menu-card {
   height: 300px;
   width: 100%;
-  margin: 0 20px;
+  margin: 0 20px ;
   border-radius: 10px;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   text-align: center;
@@ -128,4 +134,14 @@
   -moz-transition: ease-out 0.4s;
   transition: ease-out 0.4s;
   box-shadow: inset 400px 0 0 0 #ff2a2a;
+}
+
+@media screen and (max-width: 768px) {
+  .menu-card-div {
+    flex-direction: column;
+  }
+.menu-card {
+  margin: 20px 0px;
+  width: 80%;
+}
 }

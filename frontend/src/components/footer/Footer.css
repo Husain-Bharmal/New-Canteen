@@ -2,9 +2,11 @@
   background: rgba(180, 178, 178, 0.933);
   display: grid;
   grid-template-columns: 4fr 2fr 2fr 4fr;
+  padding: 30px;
 }
 .about {
-  padding-left: 30px;
+  /* padding-left: 30px; */
+  padding: 0px 40px;
 }
 
 .header p {

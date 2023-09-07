@@ -1,9 +1,23 @@
 @import url("https://fonts.googleapis.com/css2?family=Nunito:wght@200&family=Poppins:wght@300&family=Ubuntu:wght@300&display=swap");
 
+
+/* .navbar{
+  background-color: rgb(223, 114, 223);
+  font-size: 18px;
+  font-weight: bold;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: sticky;
+  top: 0px;
+  z-index: 20;
+} */
+
 .navbar {
   display: flex;
   justify-content: flex-start;
-  padding: 10px 0;
+  padding: 15px 0;
   /* box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; */
   /* background-color: ; */
   position: relative;
@@ -11,6 +25,20 @@
   background-color: rgb(132, 246, 236);
 
   font-family: "Poppins", sans-serif;
+}
+
+
+
+.hamburger-menu {
+  display: none;
+  cursor: pointer;
+}
+
+.hamburger-menu .bar {
+  width: 25px;
+  height: 3px;
+  background-color: #fff;
+  margin: 5% 0;
 }
 
 .link {
@@ -34,13 +62,14 @@
   background: #ff2a2a;
   color: white;
   border-radius: 5px;
-  padding: 5px 40px;
+  padding: 10px 40px;
   border: none;
   position: absolute;
   right: 0px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   margin-right: 10px;
-  margin-top: 0px;
+  font-size: 20px; 
+  margin-top: -7px;
 }
 
 .link:hover {
@@ -56,19 +85,39 @@
   font-weight: bold;
 }
 
+
 @media screen and (max-width: 768px) {
   .navbar {
-    justify-content: center; /* Center align links on smaller screens */
-    flex-wrap: wrap; /* Allow links to wrap to the next line if necessary */
+    justify-content: center; 
+    flex-wrap: wrap; 
+    flex-direction: column;
+  }
+
+  .smallDevice{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
   }
 
   .link {
-    font-size: 20px; /* Reduce link font size */
-    padding: 10px 15px; /* Adjust link padding */
-    margin: 5px 10px; /* Adjust link margin */
+    font-size: 20px; 
+    padding: 10px 15px; 
+    margin: 5px 10px; 
   }
+  .hamburger{
+    display: flex;
+    flex: end;
+  }
+  .hamburger p{
+    display:flex;
+    border: 1px solid black;
+    width: 60px;
 
+  }
   .btn {
-    padding: 5px 15px; /* Adjust button padding */
+    padding: 5px 15px; 
+    position: relative;
+    font-size: 20px; 
   }
 }
