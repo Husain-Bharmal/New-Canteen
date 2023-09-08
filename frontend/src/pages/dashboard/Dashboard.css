@@ -12,7 +12,7 @@
 .profile-details img {
   height: 100px;
   width: 100px;
-  border-radius: 300px;
+  /* border-radius: 300px; */
 }
 
 .profile-details h1 {
