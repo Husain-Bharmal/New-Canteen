@@ -1,5 +1,9 @@
 import React from "react";
 import "./Footer.css";
+// import heroimg from "../../assets/canteenhome.png"
+import whatsapp from "../../assets/whatsapp.png"
+import facebook from "../../assets/facebook.jpeg"
+import instagram from "../../assets/instagram.jpeg"
 
 const Footer = () => {
   return (
@@ -10,13 +14,16 @@ const Footer = () => {
         Catering is the business of providing food service at a remote site or a site such as a hotel, hospital, pub, aircraft, cruise ship, park, filming site or studio, entertainment site, or event venue.By understanding the needs of our patrons in the best possible manner, we are readily engrossed in delivering On Site Catering Services.
         </p>
       </div>
-      {/* <div className="header">
-        <h2>Header</h2>
-        <p>Link</p>
-        <p>Link</p>
-        <p>Link</p>
-        <p>Link</p> 
-      </div> */}
+      
+      <div className="social_icon">
+        <h2>Social Handels</h2>
+        {/* <img src="{social}"</img> */}
+        <img src={whatsapp} className="icons" alt="whatsapp" />
+        <img src={facebook} className="icons" alt="facebook" />
+        <img src={instagram} className="icons" alt="instagram" />
+        {/* <img src={gmail} className="icons" alt="tea" /> */}
+        
+      </div>
 
       <div className="contact-us">
         <h2>Contact Us</h2>
