@@ -6,11 +6,13 @@ import samosa from "../../assets/samosa.png";
 import Footer from "../../components/footer/Footer";
 import dosa from "../../assets/dosa.png";
 import noodles from "../../assets/noodles.png";
+import heroimg from "../../assets/canteenhome.png"
 import { getAllFoodItems } from "../../redux/food/food.actions";
 const Homepage = () => {
   return (
     <div>
       <div className="landing-page-div">
+        <img src={heroimg} alt="hero" />
         <div className="landing-page-header"> </div>
       </div>
       <div className="menu">

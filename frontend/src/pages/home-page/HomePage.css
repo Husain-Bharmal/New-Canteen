@@ -1,14 +1,12 @@
 .landing-page-div {
-  background: url("../../assets/canteenhome.png");
-  
   background-size: cover;
   background-repeat: no-repeat;
-  height: 120vh;
+  height: 100vh;
 }
 
 .landing-page-div img{
   height: 100vh;
-  width: 100vh;
+  width: 100%;
 
 }
 
@@ -142,6 +140,51 @@
   }
 .menu-card {
   margin: 20px 0px;
-  width: 80%;
+  /* width: 80%; */
 }
+.landing-page-div{
+  height: 50vh;
+}
+
+.landing-page-div img{
+  height: 50vh;
+}
+.button{
+  margin-bottom: 1rem;
+}
+}
+
+
+@media screen and (max-width: 900px){
+  .landing-page-div{
+    height: 90vh;
+  }
+  
+  .landing-page-div img{
+    height: 90vh;
+  }
+
+  .menu-card-div {
+    flex-wrap: wrap;
+  }
+
+  .menu-card {
+    margin: 20px 10px;
+    width: 70%;
+  }
+
+  .menu-card-div > .menu-card{
+    flex: 40%;
+  }
+}
+
+
+@media screen and (max-width: 400px){
+  .landing-page-div{
+    height: 70vh;
+  }
+  
+  .landing-page-div img{
+    height: 70vh;
+  }
 }
