@@ -1,9 +1,6 @@
 import React from "react";
 import "./Footer.css";
-// import heroimg from "../../assets/canteenhome.png"
-import whatsapp from "../../assets/whatsapp.png"
-import facebook from "../../assets/facebook.jpeg"
-import instagram from "../../assets/instagram.jpeg"
+import { AiFillFacebook ,AiOutlineWhatsApp ,AiFillInstagram } from "react-icons/ai";
 
 const Footer = () => {
   return (
@@ -17,11 +14,9 @@ const Footer = () => {
       
       <div className="social_icon">
         <h2>Social Handels</h2>
-        {/* <img src="{social}"</img> */}
-        <img src={whatsapp} className="icons" alt="whatsapp" />
-        <img src={facebook} className="icons" alt="facebook" />
-        <img src={instagram} className="icons" alt="instagram" />
-        {/* <img src={gmail} className="icons" alt="tea" /> */}
+        <AiFillFacebook className='icons'/>
+        <AiOutlineWhatsApp className='icons'/>
+        <AiFillInstagram className='icons' />
         
       </div>
 

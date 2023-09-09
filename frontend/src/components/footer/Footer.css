@@ -39,9 +39,10 @@
 
   }
   .icons{
-    height: 50px; 
-    margin: 0px 10px;
-    border-radius: 30px;
+    font-size: 40px;
+    color: #0c0b0b;
+    margin: 1rem;
+    cursor: pointer;
   }
 
 @media screen and (max-width: 768px) {

@@ -1,7 +1,6 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
-import Loader from "../../components/loader/Loader";
 const PrivateRoute = ({
   component: Component,
   auth: { isAuthenticated, loading, user },
