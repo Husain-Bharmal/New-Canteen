@@ -30,7 +30,7 @@ export const placeOrder = (formData, history) => async (dispatch) => {
     dispatch({ type: PLACE_ORDER_SUCCESS, data: data });
     dispatch(setAlert("Placed order successfully", "success"));
 
-    history.push("/dashboard");
+    history.push("/dashboard");  
   } catch (error) {
     console.log(error);
     const errors = error.response.data.errors;

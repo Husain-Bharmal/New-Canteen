@@ -37,4 +37,8 @@
     width: 60vw;
     margin: 10px 0px;
   }
+
+  .food-card-button{
+    width: fit-content;
+  }
 }

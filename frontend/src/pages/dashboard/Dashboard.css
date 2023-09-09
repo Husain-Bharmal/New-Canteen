@@ -6,7 +6,7 @@
 .profile-details {
   background: #ff2a2a;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-  height: 100vh;
+  height: 100%;
 }
 
 .profile-details img {
@@ -49,4 +49,36 @@
 
 .dashboard-text {
   padding-left: 40px;
+}
+
+
+
+@media screen and (max-width: 768px) {
+  .dashboard-root {
+    /* display: grid; */
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .profile-details {
+    background: #ff2a2a;
+  
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    height: 15vh;
+  }
+ 
+  
+  .profile {
+    text-align: center;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: row;
+  }
+  
+  .order-status{
+    display: flex;
+    margin: 10px 40px;
+    flex-direction: column;
+  }
+  
 }

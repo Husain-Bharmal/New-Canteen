@@ -18,7 +18,6 @@ const UserDashboard = ({ getMyOrders, orders }) => {
           <DashboardCard order={order} />
         ))}
 
-        Cancle karne wala add karo yaha
       </div>
     </div>
   );

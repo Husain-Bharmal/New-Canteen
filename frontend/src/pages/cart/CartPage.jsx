@@ -43,77 +43,86 @@ const CartPage = ({
   };
 
   return (
-    <>
-      <div className="table-div">
-        {cartItems.length > 0 ? (
-          <table className="table">
-            <tr>
-              <th>Image</th>
-              <th>Food Name</th>
-              <th>Price</th>
-              <th>Quantity</th>
-              <th>Actions</th>
-            </tr>
-
-            {cartItems.map((cartItem) => (
+    <div className="cart-container">
+      <h1>Your Cart</h1>
+      {cartItems.length > 0 ? (
+        <div className="cart-table">
+          <table>
+            <thead>
               <tr>
-                {console.log(cartItems)}
-                <td>
-                  <img alt={cartItem?.name} src={cartItem.image} />
-                </td>
-                <td>{cartItem?.name}</td>
-                {console.log(typeof cartItem.price)}
-                <td>₹{cartItem?.price * cartItem?.quantity}</td>
-                <td>{cartItem?.quantity}</td>
-                <td>
-                  <button className="add" onClick={() => AddToCart(cartItem)}>
-                    <GrAdd className="icon" />
-                  </button>
-                  <button
-                    className="minus"
-                    onClick={() => removeFromCart(cartItem)}
-                  >
-                    <GrSubtract className="icon" />
-                  </button>
-                  <button
-                    className="remove"
-                    onClick={() => clearItemFromCart(cartItem?._id)}
-                  >
-                    <ImCross />
-                  </button>
-                </td>
+                <th>Product</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Actions</th>
               </tr>
-            ))}
-
-            {user?.role === "teacher" && (
-              <div className="teacher">
-                <h2>If you want delivery at your place</h2>
-                <input
-                  type="text"
-                  name="roomNo"
-                  value={roomNo}
-                  placeholder="Room No"
-                  onChange={(e) => setRoomNo(e.target.value)}
-                />
-                <br />
-                <textarea
-                  placeholder="Enter your message"
-                  name="message"
-                  value={message}
-                  onChange={(e) => setMessage(e.target.value)}
-                ></textarea>
-              </div>
-            )}
-            <div className="cart-total">
-              <h3>Total price: ₹{getCartTotal(cartItems)}</h3>
-              <button onClick={onSubmit}>Place Order</button>
-            </div>
+            </thead>
+            <tbody>
+              {cartItems.map((cartItem) => (
+                <tr key={cartItem._id}>
+                  <td className="product-image">
+                    <img alt={cartItem.name} src={cartItem.image} />
+                  </td>
+                  <td>{cartItem.name}</td>
+                  <td>₹{cartItem.price.toFixed(2)}</td>
+                  <td>
+                    <button
+                      className="quantity-button"
+                      onClick={() => removeFromCart(cartItem)}
+                    >
+                      <GrSubtract />
+                    </button>
+                    {cartItem.quantity}
+                    <button
+                      className="quantity-button"
+                      onClick={() => AddToCart(cartItem)}
+                    >
+                      <GrAdd />
+                    </button>
+                  </td>
+                  <td>
+                    <button
+                      className="remove-button"
+                      onClick={() => clearItemFromCart(cartItem._id)}
+                    >
+                      <ImCross />
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
           </table>
-        ) : (
-          <h1>Cart is empty</h1>
-        )}
+        </div>
+      ) : (
+        <p>Your cart is empty.</p>
+      )}
+      {user?.role === "teacher" && (
+        <div className="teacher">
+          <h2>Delivery Information</h2>
+          <div className="delivery-info">
+            <input
+              type="text"
+              name="roomNo"
+              value={roomNo}
+              placeholder="Room No"
+              onChange={(e) => setRoomNo(e.target.value)}
+            />
+            <textarea
+              placeholder="Enter your message"
+              name="message"
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+            ></textarea>
+          </div>
+        </div>
+      )}
+      <div className="cart-total">
+        <h3>Total: ₹{getCartTotal(cartItems).toFixed(2)}</h3>
+        <button className="order-button" onClick={onSubmit}>
+          Place Order
+        </button>
       </div>
-    </>
+    </div>
   );
 };
 

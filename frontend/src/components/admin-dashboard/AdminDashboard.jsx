@@ -9,7 +9,7 @@ const AdminDashboard = ({ getAdminORders, orders }) => {
     getAdminORders();
   }, [getAdminORders]);
   return (
-    <div>
+    <div className="dashboard">
       <div className="order-status">
         {orders?.map((order) => (
           <DashboardCard order={order} key={order?._id} />

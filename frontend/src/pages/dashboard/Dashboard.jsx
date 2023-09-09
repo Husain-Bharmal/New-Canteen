@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { getAdminORders } from "../../redux/order/order.actions";
 import AdminDashboard from "../../components/admin-dashboard/AdminDashboard";
 import UserDashboard from "../../components/user-dashboard/UserDashboard";
-import logo from "../../assets/logo.png"
+
 import "./Dashboard.css";
 
 const Dashboard = ({ getAdminORders, user, loading }) => {
@@ -18,12 +18,10 @@ const Dashboard = ({ getAdminORders, user, loading }) => {
       <div className="dashboard-root">
         <div className="profile-details">
           <div className="profile">
-            <img
-              alt="food_img"
-              src={logo}
-            />
-            <h1>{user?.name}</h1>
-
+            
+            <p>
+              <b>User: </b> {user?.name}
+            </p>
             <p>
               <b>Branch: </b> {user?.branch}
             </p>
