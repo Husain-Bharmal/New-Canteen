@@ -4,7 +4,11 @@ const jwt = require("jsonwebtoken");
 const { check, validationResult } = require("express-validator");
 const auth = require("../middleware/auth");
 const User = require("../models/auth.models");
+const { OAuth2Client } = require('google-auth-library')
 const router = express.Router();
+
+
+const client = new OAuth2Client(process.env.Google_API_ClientID)
 
 // signup: POST (public)
 router.post(
@@ -142,5 +146,26 @@ router.get("/me", auth, async (req, res) => {
     res.status(500).send(err.message);
   }
 });
+
+
+//google route 
+// router.post("/api/v1/auth/google", async (req, res) => {
+//   const { token }  = req.body
+//   const ticket = await client.verifyIdToken({
+//       idToken: token,
+//       audience: process.env.Google_API_ClientID
+//   });
+//   const { name, email} = ticket.getPayload();    
+//   user = new User({
+//     name,
+//     email,
+//     password,
+//     branch,
+//     role,
+//     isAdmin: false,
+//   });
+//   await user.save();
+
+// })
 
 module.exports = router;
