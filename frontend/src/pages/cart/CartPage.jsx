@@ -23,9 +23,6 @@ const CartPage = ({
   const [roomNo, setRoomNo] = useState("");
   const [message, setMessage] = useState("");
 
-
-
-
   useEffect(() => {
     localStorage.setItem("cartItems", JSON.stringify(cartItems));
     console.log("cartItems", cartItems);
@@ -47,6 +44,8 @@ const CartPage = ({
     };
 
     placeOrder(orderDetails, history);
+
+    cartItems.map((item) => clearItemFromCart(item._id));
   };
 
   return (
