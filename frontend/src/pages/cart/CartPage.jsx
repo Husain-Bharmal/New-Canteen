@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import {
   AddToCart,
@@ -23,6 +23,13 @@ const CartPage = ({
   const [roomNo, setRoomNo] = useState("");
   const [message, setMessage] = useState("");
 
+
+
+
+  useEffect(() => {
+    localStorage.setItem("cartItems", JSON.stringify(cartItems));
+    console.log("cartItems", cartItems);
+    }, [cartItems]);
   const onSubmit = (e) => {
     e.preventDefault();
 

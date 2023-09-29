@@ -3,7 +3,6 @@ import {
   CLEAR_ITEM_FROM_CART,
   REMOVE_FROM_CART,
 } from "./cart.types";
-
 import { removeFromCart, addToCart } from "./cart.utils";
 const initialState = {
   cartItems: [],
