@@ -32,7 +32,6 @@ export default function cartreducer(state = initialState, action) {
       };
     }
     case CLEAR_ITEM_FROM_CART: {
-      // pajdoae
       localStorage.setItem("cartItems", JSON.stringify([]));
       return {
         ...state,
