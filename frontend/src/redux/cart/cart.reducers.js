@@ -5,7 +5,7 @@ import {
 } from "./cart.types";
 import { removeFromCart, addToCart } from "./cart.utils";
 const initialState = {
-  cartItems: [],
+  cartItems: JSON.parse(localStorage.getItem('cartItems')),
   totalPrice: 0,
   totalQuantity: 0,
 };
