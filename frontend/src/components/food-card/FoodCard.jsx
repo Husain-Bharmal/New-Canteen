@@ -8,19 +8,24 @@ import "./FoodCard.css";
 const FoodCard = ({ food, AddToCart, user, deleteFoodItem }) => {
   return (
     <div className="food-card" key={food?._id}>
-      <img alt={food?.name} src={food?.image} />
-      {!user?.isAdmin && (
-        <button className="food-card-button" onClick={() => AddToCart(food)}>
-          Add to cart
-        </button>
-      )}
+    <img alt={food?.name} src={food?.image} />
+  {food?.quantity === 0 ? (
+  <p className="out-of-stock">Out of Stock</p>
+) : (
+  !user?.isAdmin && (
+    <button className="food-card-button" onClick={() => AddToCart(food)}>
+      Add to cart
+    </button>
+  )
+)}
 
       <div className="food-headers">
         <p className="name">{food?.name}</p>
         <p className="price"> ₹{food?.price}</p>
       </div>
-      <p className="quantity">Quantity: {food?.quantity}</p>
       {user?.isAdmin && (
+        <>
+          <p className="quantity">Quantity: {food?.quantity}</p>
         <div className="admin-buttons">
           <Link className="accept" to={"/edit/" + food?._id}>
             Edit
@@ -30,6 +35,7 @@ const FoodCard = ({ food, AddToCart, user, deleteFoodItem }) => {
             Delete
           </button>
         </div>
+        </>
       )}
     </div>
   );

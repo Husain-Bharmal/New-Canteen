@@ -32,6 +32,7 @@ const CartPage = ({
 
     const orderDetails = {
       cart: cartItems.map((item) => ({
+        foodId:item._id,
         name: item.name,
         image: item.image,
         foodType: item.foodType,

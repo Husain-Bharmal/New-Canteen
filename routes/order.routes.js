@@ -1,6 +1,7 @@
 const express = require("express");
 const Order = require("../models/order.models");
 const User = require("../models/auth.models");
+const Food = require("../models/food.models");
 const router = express.Router();
 const auth = require("../middleware/auth");
 
@@ -37,7 +38,31 @@ router.get("/myorders", auth, async (req, res) => {
 router.post("/place/order", auth, async (req, res) => {
   try {
     const user = req.user.id;
+    // Assuming req.body.cart is an array of objects with food item details, including the food ID and quantity
+    const orderItems = req.body.cart;
 
+    // Initialize an array to store promises for updating food quantities
+    const updateFoodQuantityPromises = [];
+
+    // Loop through order items and create promises to update food quantities
+    orderItems.forEach((item) => {
+      const foodId = item.foodId; 
+      const quantity = item.quantity;
+      // Assuming you have a Food model/schema
+      // Update the food quantity by decrementing it based on the quantity in the order
+      const updateFoodQuantityPromise = Food.findByIdAndUpdate(
+        foodId,
+        { $inc: { quantity: -quantity } }, // Decrement the quantity
+        { new: true } // Return the updated food item
+      );
+
+      updateFoodQuantityPromises.push(updateFoodQuantityPromise);
+    });
+
+    // Wait for all update promises to resolve
+    const updatedFoods = await Promise.all(updateFoodQuantityPromises);
+
+    // Create the order and save it
     const order = new Order({
       user,
       orders: req.body.cart,
@@ -49,12 +74,13 @@ router.post("/place/order", auth, async (req, res) => {
 
     await order.save();
 
-    res.json(order);
+    res.json({ order, updatedFoods }); // Send back the order and updated food items
   } catch (error) {
     console.error(error.message);
     res.status(500).send("Server Error");
   }
 });
+
 
 // Update order status : PUT (private)
 router.put("/orders/:id", auth, async (req, res) => {

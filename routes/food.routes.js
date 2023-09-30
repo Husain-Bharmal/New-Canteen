@@ -6,6 +6,14 @@ const auth = require("../middleware/auth");
 const upload = require("../middleware/cloudinary");
 const { check, validationResult } = require("express-validator");
 
+
+const isInteger = (value) => {
+  if (Number.isInteger(Number(value))) {
+    return true;
+  }
+  return false;
+};
+
 // additem : POST (private)
 router.post(
   "/add",
@@ -16,8 +24,8 @@ router.post(
       auth,
       check("name", "Food name is required").not().isEmpty(),
       check("foodType", "Food category is required").not().isEmpty(),
-      check("price", "Food price is required").not().isEmpty(),
-      check("quantity", "Qunatity is required").not().isEmpty(),
+      check("price", "Food price is required").not().isEmpty().custom(isInteger),
+      check("quantity", "Qunatity is required").not().isEmpty().custom(isInteger),
     ],
   ],
   async (req, res) => {

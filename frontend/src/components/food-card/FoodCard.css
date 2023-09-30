@@ -83,3 +83,12 @@
   align-items: center;
   padding: 20px;
 }
+
+.out-of-stock {
+  background-color: #ff0000; /* Red background color */
+  color: #ffffff; /* White text color */
+  padding: 5px 10px; /* Add some padding for better readability */
+  font-weight: bold; /* Make the text bold */
+  text-align: center; /* Center the text horizontally */
+  border-radius: 1rem;
+}
