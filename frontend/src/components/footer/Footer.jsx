@@ -1,6 +1,8 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./Footer.css";
 import { AiFillFacebook ,AiOutlineWhatsApp ,AiFillInstagram } from "react-icons/ai";
+import {VscFeedback} from "react-icons/vsc"
 
 const Footer = () => {
   return (
@@ -17,7 +19,7 @@ const Footer = () => {
         <AiFillFacebook className='icons'/>
         <AiOutlineWhatsApp className='icons'/>
         <AiFillInstagram className='icons' />
-        
+        <Link to="/feedback" className="icons"><VscFeedback/></Link>
       </div>
 
       <div className="contact-us">

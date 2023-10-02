@@ -82,7 +82,7 @@ const SignUpPage = ({ registerUser, isAuthenticated, setAlert }) => {
               <option value="COMPUTER">Computer</option>
               <option value="IT">IT</option>
               <option value="EXTC">EXTC</option>
-              <option value="ETRX">AIDS</option>
+              <option value="AIDS">AIDS</option>
             </select>
             <br />
 

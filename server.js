@@ -8,12 +8,14 @@ require("dotenv").config();
 
 connectDB();
 app.use(express.json({ extended: false }));
+app.use(express.urlencoded({extended:false}))
 
 app.use(cors());
 
 app.use(require("./routes/auth.routes"));
 app.use(require("./routes/food.routes"));
 app.use(require("./routes/order.routes"));
+app.use(require("./routes/feedback.routes"))
 
 const PORT = process.env.PORT || 5000;
 

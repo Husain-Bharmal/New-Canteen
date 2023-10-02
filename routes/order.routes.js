@@ -38,26 +38,37 @@ router.get("/myorders", auth, async (req, res) => {
 router.post("/place/order", auth, async (req, res) => {
   try {
     const user = req.user.id;
-    // Assuming req.body.cart is an array of objects with food item details, including the food ID and quantity
     const orderItems = req.body.cart;
 
     // Initialize an array to store promises for updating food quantities
     const updateFoodQuantityPromises = [];
 
-    // Loop through order items and create promises to update food quantities
-    orderItems.forEach((item) => {
-      const foodId = item.foodId; 
-      const quantity = item.quantity;
-      // Assuming you have a Food model/schema
-      // Update the food quantity by decrementing it based on the quantity in the order
+    // Check if the requested quantity is available for each item in the order
+    for (const item of orderItems) {
+      const foodId = item.foodId; // Access _id from the cart item
+      const requestedQuantity = item.quantity;
+
+      // Find the food item in the database
+      const foodItem = await Food.findById(foodId);
+
+      if (!foodItem) {
+        return res.status(400).json({ errors: [{ msg: "Food item not found" }] });
+      }
+
+      // Check if the requested quantity is greater than the available quantity
+      if (requestedQuantity > foodItem.quantity) {
+        return res.status(400).json({ errors: [{ msg: "Insufficient stock for one or more items" }] });
+      }
+
+      // Add the update promise to the array
       const updateFoodQuantityPromise = Food.findByIdAndUpdate(
         foodId,
-        { $inc: { quantity: -quantity } }, // Decrement the quantity
+        { $inc: { quantity: -requestedQuantity } }, // Decrement the quantity
         { new: true } // Return the updated food item
       );
 
       updateFoodQuantityPromises.push(updateFoodQuantityPromise);
-    });
+    }
 
     // Wait for all update promises to resolve
     const updatedFoods = await Promise.all(updateFoodQuantityPromises);
@@ -74,12 +85,13 @@ router.post("/place/order", auth, async (req, res) => {
 
     await order.save();
 
-    res.json({ order, updatedFoods }); // Send back the order and updated food items
+    res.json({ order, updatedFoods });
   } catch (error) {
     console.error(error.message);
     res.status(500).send("Server Error");
   }
 });
+
 
 
 // Update order status : PUT (private)

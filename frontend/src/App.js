@@ -6,7 +6,7 @@ import setAuthToken from "./utils/setAuthToken";
 import Homepage from "./pages/home-page/HomePage";
 import SignInPage from "./pages/sign-in-page/SignInPage";
 import SignUpPage from "./pages/sign-up-page/SignUpPage";
-// import Footer from "./components/footer/Footer";
+import Feedback from "./components/feedback/Feedback";
 import AddFoodPage from "./pages/add-food-page/AddFoodPage";
 import FoodPage from "./pages/food-page/FoodPage";
 import CartPage from "./pages/cart/CartPage";
@@ -39,6 +39,7 @@ function App() {
           <PrivateRoute exact path="/cart" component={CartPage} />
           <PrivateRoute exact path="/dashboard" component={Dashboard} />
           <PrivateRoute exact path="/food/:food" component={FoodPage} />
+          <PrivateRoute exact path="/feedback" component={Feedback} />
           <AdminRoute exact path="/edit/:id" component={EditFoodPage} />
         </Switch>
         {/* <Footer/> */}
