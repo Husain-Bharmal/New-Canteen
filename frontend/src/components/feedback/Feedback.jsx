@@ -1,24 +1,31 @@
 import React, { useState } from 'react';
-import { connect } from "react-redux";
-import  {feedbackPost}  from '../../redux/feedback/feedback.actions';
+import { connect } from 'react-redux';
+import { feedbackPost } from '../../redux/feedback/feedback.actions';
 import './FeedbackForm.css'; // Import your CSS file
 
-const Feedback = ({feedbackPost}) => {
-    const [formData,setFormData] = useState({
-  name:'',
-  email:'',
-  branch:'',
-  description:'',
-    })
-    const onChange = (e) => {
-      setFormData({ ...formData, [e.target.name]: e.target.value });
-    };
+const Feedback = ({ feedbackPost }) => {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    branch: '',
+    description: '',
+  });
 
-    const onSubmit = (e) => {
-      e.preventDefault();
-      console.log("the data is gone");
-      feedbackPost(formData);
-    };
+  const onChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    feedbackPost(formData);
+    setFormData({
+      name: '',
+      email: '',
+      branch: '',
+      description: '',
+    });
+    alert('Form submitted successfully!'); // Show success alert
+  };
 
   return (
     <div className="feedback-form">
@@ -29,7 +36,8 @@ const Feedback = ({feedbackPost}) => {
             type="text"
             id="name"
             name="name"
-            placeholder='Name'
+            placeholder="Name"
+            value={formData.name}
             onChange={onChange}
             required
           />
@@ -39,38 +47,45 @@ const Feedback = ({feedbackPost}) => {
             type="email"
             id="email"
             name="email"
-            placeholder='Email'
+            placeholder="Email"
+            value={formData.email}
             onChange={onChange}
             required
           />
         </div>
         <div className="form-group">
-          <select name="branch" onChange={onChange} id="cars">
-              <option value="null">Branch </option>
-              <option value="COMPUTER">Computer</option>
-              <option value="IT">IT</option>
-              <option value="EXTC">EXTC</option>
-              <option value="AIDS">AIDS</option>
-            </select>
+          <select
+            name="branch"
+            onChange={onChange}
+            value={formData.branch}
+            id="cars"
+            required
+          >
+            <option value="">Branch</option>
+            <option value="COMPUTER">Computer</option>
+            <option value="IT">IT</option>
+            <option value="EXTC">EXTC</option>
+            <option value="AIDS">AIDS</option>
+          </select>
         </div>
         <div className="form-group">
           <textarea
             id="description"
             name="description"
-            placeholder='description'
+            placeholder="Description"
+            value={formData.description}
             onChange={onChange}
             maxLength={200}
             style={{ resize: 'none' }}
             required
           />
         </div>
-        <button type="submit" className='sub_btn'>Submit</button>
+        <button type="submit" className="sub_btn">
+          Submit
+        </button>
       </form>
     </div>
   );
-}
-const mapStateToProps = (state) => ({
-  isAuthenticated: state.auth.isAuthenticated,
-});
+};
 
-export default connect(mapStateToProps,{feedbackPost})(Feedback);
+export default connect(null, { feedbackPost })(Feedback);
