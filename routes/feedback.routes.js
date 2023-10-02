@@ -25,6 +25,7 @@ router.post('/feedback',auth,  [
             description,
         });
         await data.save();
+        res.json({data})
     }catch (error) {
         console.log(error.message);
         res.status(500).send(error);

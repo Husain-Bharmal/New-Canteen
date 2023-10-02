@@ -4,11 +4,7 @@ import { setAlert } from "../alert/alert.actions";
 
 export const feedbackPost = (formData, history) => async (dispatch) => {
   try {
-    const { data } = await axios.post("/feedback", formData, {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
+    const { data } = await axios.post("/feedback", formData);
 
     // Handle the successful response here
     console.log("Response data:", data);

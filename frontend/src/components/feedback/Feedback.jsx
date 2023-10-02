@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { feedbackPost } from '../../redux/feedback/feedback.actions';
 import './FeedbackForm.css'; // Import your CSS file
 
-const Feedback = ({ feedbackPost }) => {
+const Feedback = ({ feedbackPost,history }) => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -17,14 +17,14 @@ const Feedback = ({ feedbackPost }) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    feedbackPost(formData);
+    feedbackPost(formData,history);
     setFormData({
       name: '',
       email: '',
       branch: '',
       description: '',
     });
-    alert('Form submitted successfully!'); // Show success alert
+    // alert('Form submitted successfully!'); // Show success alert
   };
 
   return (
