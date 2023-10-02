@@ -1,0 +1,54 @@
+/* Style for the table container */
+
+/* Style for the table */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #ffffff;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+}
+
+/* Style for table headers */
+th {
+  background-color: #ff2a2a;
+  color: #ffffff;
+  font-weight: bold;
+  padding: 12px;
+  text-align: left;
+}
+
+/* Style for table rows */
+tr {
+  border-bottom: 1px solid #dddddd;
+}
+
+/* Style for table data cells */
+td {
+  padding: 10px;
+  text-align: left;
+}
+
+/* Style for alternate rows (zebra striping) */
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+.btns{
+  text-align: center;
+  margin: 20px 0;
+}
+.roles_btn {
+  padding: 10px 20px;
+  margin: 0 5px;
+  font-size: 16px;
+  border: none;
+  background-color: #ff2a2a;
+  color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.roles_btn.active {
+  background-color: #b91414; /* Button background color when active */
+}

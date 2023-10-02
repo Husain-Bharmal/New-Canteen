@@ -2,6 +2,7 @@ const express = require("express");
 const { check, validationResult } = require("express-validator");
 const auth = require("../middleware/auth");
 const Form = require('../models/feedback.models')
+const Users = require("../models/auth.models")
 const router = express.Router();
 
 
@@ -30,6 +31,16 @@ router.post('/feedback',auth,  [
         console.log(error.message);
         res.status(500).send(error);
       }
+})
+
+router.get("/getusers",auth, async (req,res)=>{
+  try {
+    const users = await Users.find({}).select("-password")
+    res.json(users)
+  } catch (error) {
+    console.error(err.message);
+    res.status(500).send(err.message);
+  }
 })
 
 module.exports = router;
