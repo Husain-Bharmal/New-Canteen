@@ -1,2 +1,0 @@
-export const FEEDBACK_SUCCESS = "FEEDBACK_SUCESS";
-export const FEEDBACK_FAIL = "FEEDBACK_FAIL";
