@@ -3,6 +3,7 @@
   import Loader from "../../components/loader/Loader";
   import { connect } from "react-redux";
   import { getAdminORders } from "../../redux/order/order.actions";
+import { getMyOrders } from "../../redux/order/order.actions";
   import AdminDashboard from "../../components/admin-dashboard/AdminDashboard";
   // import UserDashboard from "../../components/user-dashboard/UserDashboard";
   import GetUsersBtn from "../../components/features_btn/users/Users";
@@ -11,7 +12,7 @@
 
   import "./Dashboard.css";
 
-  const Dashboard = ({ getAdminORders, user, loading }) => {
+  const Dashboard = ({ getAdminORders, getMyOrders, user, loading }) => {
     const [condition, setCondition] = useState("component0");
 
     const componentMap = {
@@ -45,7 +46,10 @@
       getAdminORders();
     }, [getAdminORders]);
 
-
+    useEffect(() => {
+      getMyOrders();
+    }, [getMyOrders]);
+  
 
     return (
       <div>
@@ -106,4 +110,6 @@
     loading: state.order.loading,
   });
 
-  export default connect(mapStateToProps, { getAdminORders })(Dashboard);
+  export default connect(mapStateToProps, {getMyOrders, getAdminORders })(Dashboard);
+ 
+
