@@ -66,7 +66,7 @@ router.post("/place/order", auth, async (req, res) => {
           $inc: {
             quantity: -requestedQuantity,
             totalItemSold: requestedQuantity,
-            totalEarnings: item.price * requestedQuantity,
+            totalEarnings: item.price,
           },
         },
         { new: true }
