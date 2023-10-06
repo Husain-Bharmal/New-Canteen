@@ -23,19 +23,14 @@ import { getMyOrders } from "../../redux/order/order.actions";
     };
 
     const renderComponent = () => {
-      if (user && user.role === "admin") {
-        return <AdminDashboard />;
-      } else {
         if (["component1", "component2", "component3"].includes(condition)) {
           // If the condition is one of the buttons that should hide the Welcome component
           return componentMap[condition] || null;
         } else {
           return <Welcome userName={user?.name} />;
         }
-      }
     };
     
-        
     
     const handleButtonClick = (newCondition) => {
       setCondition(newCondition);
