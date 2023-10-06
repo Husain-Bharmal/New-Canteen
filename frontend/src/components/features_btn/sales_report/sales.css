@@ -37,7 +37,7 @@
   
   /* Style the total amount column */
   td:nth-child(3) {
-    text-align: right;
+    text-align: left;
   }
   
   /* Style the table header on smaller screens */

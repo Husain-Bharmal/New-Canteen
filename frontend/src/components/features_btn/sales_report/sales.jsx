@@ -23,9 +23,9 @@ const FoodItemTable = ({ foods,foodItems ,match, getAllFoodItems}) => {
         <tbody>
           {foods.map((item, index) => (
             <tr key={index}>
-              <td>{item.name}</td>
-              <td>{item.quantitySold}</td>
-              <td>${item.totalAmount}</td>
+              <td>{item.name}</td>  
+              <td>{item.totalItemSold}</td>
+              <td>{item.totalItemSold !== 0 ? `${item.totalEarnings} Rs` : '0 Rs'}</td>
             </tr>
           ))}
         </tbody>

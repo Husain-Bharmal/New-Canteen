@@ -19,7 +19,14 @@ const FoodItemSchema = new mongoose.Schema({
   quantity:{
     type:Number,
     required:true
+  },
+  totalItemSold:{
+    type:Number,
+  },
+  totalEarnings:{
+    type:Number,
   }
+
 });
 
 module.exports = mongoose.model('food', FoodItemSchema);

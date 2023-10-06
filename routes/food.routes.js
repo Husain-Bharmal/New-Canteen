@@ -37,7 +37,7 @@ router.post(
     try {
       const user = await User.findById(req.user.id);
       if (user.isAdmin) {
-        const { foodType, name, price, quantity } = req.body;
+        const { foodType, name, price, quantity ,totalItemSold } = req.body;
 
         const food = new Food({
           foodType,
@@ -45,6 +45,7 @@ router.post(
           price,
           quantity,
           image: req.file.path,
+          totalItemSold : 0,
         });
         await food.save();
         res.json({ msg: "Added item successfully", food });
@@ -85,7 +86,7 @@ router.put("/edit/:id", auth, upload, async (req, res) => {
 
       food = await Food.findByIdAndUpdate(
         req.params.id,
-        { foodType, name, price, quantity, image },
+        { foodType, name, price, quantity, image, totalItemSold:0},
         { new: true }
       );
       res.json(food);

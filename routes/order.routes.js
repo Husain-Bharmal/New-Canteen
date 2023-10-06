@@ -34,18 +34,18 @@ router.get("/myorders", auth, async (req, res) => {
   }
 });
 
+
 // post orders : POST (private)
 router.post("/place/order", auth, async (req, res) => {
   try {
     const user = req.user.id;
     const orderItems = req.body.cart;
 
-    // Initialize an array to store promises for updating food quantities
-    const updateFoodQuantityPromises = [];
+    // Initialize an array to store promises for updating food quantities and earnings
+    const updateFoodPromises = [];
 
-    // Check if the requested quantity is available for each item in the order
     for (const item of orderItems) {
-      const foodId = item.foodId; // Access _id from the cart item
+      const foodId = item.foodId;
       const requestedQuantity = item.quantity;
 
       // Find the food item in the database
@@ -57,23 +57,26 @@ router.post("/place/order", auth, async (req, res) => {
 
       // Check if the requested quantity is greater than the available quantity
       if (requestedQuantity > foodItem.quantity) {
-        return res.status(400).json({ errors: [{ msg: "Insufficient stock for one or more items" }] });
+        return res.status(400).json({ errors: [{ msg: `Insufficient stock for ${item.name}` }] });
       }
 
-      // Add the update promise to the array
-      const updateFoodQuantityPromise = Food.findByIdAndUpdate(
+      const updateFoodPromise = Food.findByIdAndUpdate(
         foodId,
-        { $inc: { quantity: -requestedQuantity } }, // Decrement the quantity
-        { new: true } // Return the updated food item
+        {
+          $inc: {
+            quantity: -requestedQuantity,
+            totalItemSold: requestedQuantity,
+            totalEarnings: item.price * requestedQuantity,
+          },
+        },
+        { new: true }
       );
 
-      updateFoodQuantityPromises.push(updateFoodQuantityPromise);
+      updateFoodPromises.push(updateFoodPromise);
     }
 
-    // Wait for all update promises to resolve
-    const updatedFoods = await Promise.all(updateFoodQuantityPromises);
+    const updatedFoods = await Promise.all(updateFoodPromises);
 
-    // Create the order and save it
     const order = new Order({
       user,
       orders: req.body.cart,
@@ -85,12 +88,20 @@ router.post("/place/order", auth, async (req, res) => {
 
     await order.save();
 
-    res.json({ order, updatedFoods });
+    const totalQuantitySold = await Order.aggregate([
+      { $unwind: "$orders" },
+      { $group: { _id: null, total: { $sum: "$orders.quantity" } } },
+    ]);
+
+    const totalQuantitySoldValue = totalQuantitySold.length === 0 ? 0 : totalQuantitySold[0].total;
+
+    res.json({ order, updatedFoods, totalQuantitySold: totalQuantitySoldValue });
   } catch (error) {
     console.error(error.message);
     res.status(500).send("Server Error");
   }
 });
+
 
 
 
