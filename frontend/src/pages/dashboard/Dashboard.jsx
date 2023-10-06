@@ -64,7 +64,7 @@ import { getMyOrders } from "../../redux/order/order.actions";
               </p>
             </div>
             <div className="features_btn_div">
-    {user && user.role === "teacher" && (
+    {user && user.isAdmin === true && (
       <>
         <button
           className="features_btn"
