@@ -41,7 +41,7 @@ const Navbar = ({
       <Link to="/dashboard" className="link">
         Dashboard
       </Link>
-      <button className="link btn logOut" onClick={() => logoutUser()} href="#!">
+      <button to="#"className="link btn logOut" onClick={() => logoutUser()} href="#!">
         Logout
       </button>
     </div>
@@ -58,7 +58,7 @@ const Navbar = ({
       <Link to="/dashboard" className="link">
         Dashboard
       </Link>
-      <Link className="link btn logOut" onClick={() => logoutUser()}>
+      <Link to="#" className="link btn logOut" onClick={() => logoutUser()}>
         Logout
       </Link>
     </div>

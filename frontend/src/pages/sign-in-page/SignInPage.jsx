@@ -42,7 +42,7 @@ const SignInPage = ({ isAuthenticated, loginUser }) => {
     return <Redirect to="/" />;
   }
   return (
-    <div class="Pura_signin">
+    <div className="Pura_signin">
 
       <div className="signin-root">
         <div className="signin-div">
