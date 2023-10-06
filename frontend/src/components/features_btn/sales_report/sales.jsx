@@ -1,10 +1,14 @@
 import React from "react";
+import { useEffect } from "react";
+import { getAllFoodItems } from "../../../redux/food/food.actions";
+import { connect } from "react-redux";
 import "./sales.css";
 
-const FoodItemTable = ({ foodItems }) => {
-    if (!foodItems || foodItems.length === 0) {
-        return <div>No data available.</div>; // You can provide a message or UI for no data.
-      }
+const FoodItemTable = ({ foods,foodItems ,match, getAllFoodItems}) => {
+  console.log("food items are:",foods);
+  useEffect(() => {
+    getAllFoodItems("all");
+  }, [getAllFoodItems, match]);
   return (
     <div className="food-item-table">
       <h2>Food Item Sales Report</h2>
@@ -17,11 +21,11 @@ const FoodItemTable = ({ foodItems }) => {
           </tr>
         </thead>
         <tbody>
-          {foodItems.map((item, index) => (
+          {foods.map((item, index) => (
             <tr key={index}>
               <td>{item.name}</td>
               <td>{item.quantitySold}</td>
-              <td>${item.totalAmount.toFixed(2)}</td>
+              <td>${item.totalAmount}</td>
             </tr>
           ))}
         </tbody>
@@ -30,4 +34,8 @@ const FoodItemTable = ({ foodItems }) => {
   );
 };
 
-export default FoodItemTable;
+const mapStateToProps =(state)=>({
+  foods: state.food.foods,
+});
+
+export default connect(mapStateToProps,{getAllFoodItems})(FoodItemTable);

@@ -10,7 +10,7 @@ table {
 }
 
 /* Style for table headers */
-th {
+.column{
   background-color: #ff2a2a;
   color: #ffffff;
   font-weight: bold;

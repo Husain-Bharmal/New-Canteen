@@ -52,7 +52,6 @@ export const getAllFoodItems = (category) => async (dispatch) => {
     dispatch({ type: GET_ALL_FOOD_ITEMS_REQUEST });
 
     const { data } = await axios.get(`/food/${category}`);
-
     dispatch({ type: GET_ALL_FOOD_ITEMS_SUCCESS, payload: data.data });
   } catch (error) {
     console.log(error);

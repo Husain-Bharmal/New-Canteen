@@ -59,9 +59,9 @@ const UsersTable = () => {
       <table>
         <thead>
           <tr>
-            <th>Name</th>
-            <th>Branch</th>
-            <th>Email</th>
+            <th className='column'>Name</th>
+            <th className='column'>Branch</th>
+            <th className='column'>Email</th>
           </tr>
         </thead>
         <tbody>

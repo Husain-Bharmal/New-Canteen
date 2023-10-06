@@ -125,11 +125,16 @@ router.get("/search/:food", auth, async (req, res) => {
 });
 
 // get item : GET (private)
-router.get("/food/:food", auth, async (req, res) => {
+router.get("/food/:food",auth, async (req, res) => {
   const food = req.params.food;
   try {
-    const foods = await Food.find({ foodType: food });
-    res.json({ data: foods });
+    if(food =="all"){
+      const allfood = await Food.find({})
+      res.json({data: allfood})
+    }else{
+      const foods = await Food.find({ foodType: food });
+      res.json({ data: foods });
+    }
   } catch (error) {
     console.error(error.message);
     res.status(500).send(error.message);
