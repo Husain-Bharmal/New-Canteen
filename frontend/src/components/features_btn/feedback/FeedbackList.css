@@ -1,0 +1,135 @@
+/* FeedbackList.css */
+
+.container {
+
+    height: 100vh;
+  }
+  
+  .feedback-list-container {
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .feedback-heading {
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .scrollable-table-container {
+    max-height: 400px; /* Set the max height according to your needs */
+    overflow-y: auto;
+  }
+  
+  .feedback-table {
+    width: 100%;
+    border-collapse: collapse;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .feedback-table th,
+  .feedback-table td {
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+  }
+  
+  .feedback-row:hover {
+    background-color: #f5f5f5;
+  }
+  
+  .feedback-row td:first-child {
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+  }
+  
+  .feedback-row td:last-child {
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+  }
+  
+  /* Filter styles */
+  
+  .filter-container {
+    margin-bottom: 20px;
+  }
+  
+  .filter-container label {
+    margin-right: 10px;
+  }
+  
+  .filter-container select {
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+  }
+/* FeedbackList.css */
+
+.container {
+    display: flex;
+    height: 100vh;
+    justify-content: flex-start;
+  }
+  
+  .feedback-list-container {
+    max-width: 800px;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .feedback-heading {
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .scrollable-table-container {
+    max-height: 400px; /* Set the max height according to your needs */
+    overflow-y: auto;
+  }
+  
+  .feedback-table {
+    width: 100%;
+    border-collapse: collapse;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .feedback-table th,
+  .feedback-table td {
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+  }
+  
+  .feedback-row:hover {
+    background-color: #f5f5f5;
+  }
+  
+  .feedback-row td:first-child {
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+  }
+  
+  .feedback-row td:last-child {
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+  }
+  
+  /* Filter styles */
+  
+  .filter-container {
+    margin-bottom: 20px;
+  }
+  
+  .filter-container label {
+    margin-right: 10px;
+  }
+  
+  .filter-container select {
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+  }
+    

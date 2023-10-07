@@ -43,4 +43,14 @@ router.get("/getusers",auth, async (req,res)=>{
   }
 })
 
+router.get('/feedback', async (req, res) => {
+  try {
+      const feedbackData = await Form.find();
+      res.json(feedbackData);
+  } catch (error) {
+      console.error(error.message);
+      res.status(500).send('Server Error');
+  }
+});
+
 module.exports = router;
