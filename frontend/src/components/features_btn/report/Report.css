@@ -1,0 +1,134 @@
+/* Report.css */
+.report-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f7f7f7;
+  }
+  
+  h2 {
+    text-align: center;
+    color: #333;
+  }
+  
+  button {
+    margin: 5px;
+    padding: 10px 20px;
+    border: none;
+    background-color: #ff2a2a;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #b91818;
+  }
+  
+  .date-picker {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  table th,
+  table td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: left;
+  }
+  
+  table th {
+    background-color: #ff2a2a;
+    color: #fff;
+  }
+
+  .noData {
+    color: #888; /* Text color for no data message */
+    font-size: 16px; /* Font size */
+    text-align: center; /* Center-align the message */
+    margin: 20px 0; /* Add some spacing around the message */
+  }
+
+  button.active {
+    background-color: #b11a1a;
+  }
+  
+
+  .react-datepicker-wrapper {
+    display: inline-block;
+    position: relative;
+    font-size: 16px; /* Adjust font size */
+    width: 200px; /* Adjust width as needed */
+  }
+  
+  .react-datepicker__input-container input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc; /* Add a border */
+    border-radius: 5px;
+    outline: none;
+    margin: 1rem;
+  }
+  
+  /* Style for the calendar popup */
+  .react-datepicker-popper {
+    z-index: 9999; /* Adjust z-index as needed */
+    margin: 0 0 0 1rem;
+  }
+  
+  .react-datepicker {
+    font-size: 16px; /* Adjust font size */
+  }
+  
+  /* Style for the calendar header */
+  .react-datepicker__header {
+    background-color: #ff2a2a; /* Header background color */
+    color: #fff; /* Header text color */
+  }
+  
+  /* Style for the previous and next month buttons */
+  .react-datepicker__navigation {
+    border: none;
+  }
+  
+  .react-datepicker__navigation--previous {
+    border-right-color: transparent;
+  }
+  
+  .react-datepicker__navigation--next {
+    border-left-color: transparent;
+  }
+  
+  /* Style for the selected date */
+  .react-datepicker__day--selected {
+    background-color: #ff2a2a; /* Selected date background color */
+    color: #fff; /* Selected date text color */
+  }
+  
+  /* Style for the hover effect on date cells */
+  .react-datepicker__day:hover {
+    background-color: #f0f0f0; /* Hover background color */
+  }
+
+  .download-button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    margin-top: 20px;
+    cursor: pointer;
+  }
+  
+  .download-button:hover {
+    background-color: #0056b3;
+  }
