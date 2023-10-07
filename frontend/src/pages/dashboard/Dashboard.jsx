@@ -10,6 +10,7 @@ import GetUsersBtn from "../../components/features_btn/users/Users";
 import Welcome from "../../components/features_btn/welcome/Welcome";
 import Sales from "../../components/features_btn/sales_report/sales";
 import { getAllFoodItems } from "../../redux/food/food.actions";
+import Report from "../../components/features_btn/report/Report";
 
 import "./Dashboard.css";
 import FeedbackView from "../../components/features_btn/feedback/Feedback_view";
@@ -22,11 +23,12 @@ const Dashboard = ({ getAdminORders, getMyOrders, user, loading }) => {
     component2: <AdminDashboard />,
     component3: <Sales foodItems={"all"} />,
     component4: <FeedbackView/>,
+    component5:<Report/>
     // Add more components and conditions here
   };
 
   const renderComponent = () => {
-    if (["component1", "component2", "component3", "component4"].includes(condition)) {
+    if (["component1", "component2", "component3", "component4","component5"].includes(condition)) {
       // If the condition is one of the buttons that should hide the Welcome component
       return componentMap[condition] || null;
     } else {
@@ -84,6 +86,12 @@ const Dashboard = ({ getAdminORders, getMyOrders, user, loading }) => {
                     onClick={() => {handleButtonClick("component4")}}
                   >
                     Feedbacks
+                  </button>
+                  <button
+                    className="features_btn"
+                    onClick={() => {handleButtonClick("component5")}}
+                  >
+                    Report
                   </button>
               </>
             )}

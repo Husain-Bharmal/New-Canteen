@@ -1,7 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { getAllFoodItems } from "../../../redux/food/food.actions";
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from "recharts";
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+} from "recharts";
 import "./sales.css";
 const FoodItemTable = ({ foods, match, getAllFoodItems }) => {
   useEffect(() => {
@@ -21,24 +29,40 @@ const FoodItemTable = ({ foods, match, getAllFoodItems }) => {
     setBarChartData(transformedData);
   }, [foods]);
 
-  // Find the most selling product
-  const mostSellingProduct = foods.reduce((maxProduct, currentProduct) => {
-    return currentProduct.totalItemSold > maxProduct.totalItemSold ? currentProduct : maxProduct;
-  }, foods[0]);
+  // // Find the most selling product
+  // const mostSellingProduct = foods.reduce(
+  //   (max, current) => {
+  //     if (current.totalItemSold > max[0].totalItemSold) {
+  //       return [current];
+  //     } else if (current.totalItemSold === max[0].totalItemSold) {
+  //       max.push(current);
+  //     }
+  //     return max;
+  //   },
+  //   [foods[0]]
+  // );
+
+  // Find the maximum totalItemSold value
+const maxTotalItemSold = Math.max(...foods.map((product) => product.totalItemSold));
+
+// Filter products that have the maximum totalItemSold value
+const mostSellingProduct = foods.filter((product) => product.totalItemSold === maxTotalItemSold);
 
   return (
     <div className="food-item-table">
       <h2>Food Item Sales Report</h2>
 
       {/* Display most selling product if it exists */}
-      {mostSellingProduct && (
+      {mostSellingProduct.length > 0 && (
         <div className="most-selling-product">
-          <h3>Most Selling Product:</h3>
-          <div className="most-selling-product-details">
-          <p>{mostSellingProduct.name}</p>
-          <p>Quantity Sold: {mostSellingProduct.totalItemSold}</p>
-          <p>Total Earnings: {mostSellingProduct.totalEarnings} Rs</p>
-          </div>
+          <h3>Most Selling Products:</h3>
+          {mostSellingProduct.map((product, index) => (
+            <div key={index} className="most-selling-product-details">
+              <p>{product?.name}</p>
+              <p>Quantity Sold: {product?.totalItemSold}</p>
+              <p>Total Earnings: {product?.totalEarnings} Rs</p>
+            </div>
+          ))}
         </div>
       )}
 
@@ -56,7 +80,9 @@ const FoodItemTable = ({ foods, match, getAllFoodItems }) => {
             <tr key={index}>
               <td>{item.name}</td>
               <td>{item.totalItemSold}</td>
-              <td>{item.totalEarnings !== 0 ? `${item.totalEarnings} Rs` : '0 Rs'}</td>
+              <td>
+                {item.totalEarnings !== 0 ? `${item.totalEarnings} Rs` : "0 Rs"}
+              </td>
             </tr>
           ))}
         </tbody>
