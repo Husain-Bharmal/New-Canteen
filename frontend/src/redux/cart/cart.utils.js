@@ -1,5 +1,11 @@
 export const addToCart = (cartItems, cartItemToAdd) => {
   // Check if item already exists using find method
+  if (!cartItems) {
+    // If cartItems is null or undefined, initialize it as an empty array
+    cartItems = [];
+  }
+
+  // Check if item already exists using find method
   const existingCartItem = cartItems.find(
     (cartItem) => cartItem._id === cartItemToAdd._id
   );

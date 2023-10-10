@@ -52,7 +52,7 @@ const CartPage = ({
   return (
     <div className="cart-container">
       <h1>Your Cart</h1>
-      {cartItems.length > 0 ? (
+      { cartItems && Object.keys(cartItems).length > 0 ? (
         <div className="cart-table">
           <table>
             <thead>
