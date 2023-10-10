@@ -42,9 +42,15 @@ export const removeFromCart = (cartItems, cartItemToRemove) => {
 };
 
 export const getCartTotal = (cartItems) => {
-  const sum = cartItems.reduce(
+  if (cartItems === null || typeof cartItems !== 'object' || Object.keys(cartItems).length === 0) {
+    return 0; // If cartItems is null, not an object, or an empty object, return 0 as the total.
+  }
+
+  const sum = Object.values(cartItems).reduce(
     (accumulator, cartItem) => accumulator + cartItem.quantity * cartItem.price,
     0
   );
+
   return sum;
 };
+
