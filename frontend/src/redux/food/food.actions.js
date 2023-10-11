@@ -82,7 +82,7 @@ export const editFoodItem = (formData, id, history) => async (dispatch) => {
     dispatch({ type: EDIT_FOOD_ITEM_SUCCESS, payload: data });
     dispatch(setAlert("Edit food done", "success"));
 
-    history.push("/");
+    history.push(`/food/${formData.get("foodType")}`);
   } catch (error) {
     console.log(error);
     const errors = error.response.data.errors;
