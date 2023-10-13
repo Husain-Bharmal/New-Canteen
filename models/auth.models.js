@@ -27,6 +27,12 @@ const UserSchema = new Schema({
   isAdmin: {
     type: Boolean,
   },
+  otp:{
+    type:Number,
+  },
+  otpTimestamp:{
+  type: Date,
+  }
 });
 
 module.exports = mongoose.model('user', UserSchema);
