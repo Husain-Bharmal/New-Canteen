@@ -28,7 +28,7 @@ const UserSchema = new Schema({
     type: Boolean,
   },
   otp:{
-    type:Number,
+    type:String,
   },
   otpTimestamp:{
   type: Date,

@@ -231,7 +231,7 @@ router.post('/reset-password', async (req, res) => {
       return res.status(404).json({ message: 'User not found' });
     }
 
-
+    const otpTimestamp = user.otpTimestamp;
     const currentTimestamp = Date.now();
     const timeDifference = currentTimestamp - otpTimestamp;
     const otpExpiration = 10 * 60 * 1000; // 10 minutes in milliseconds
