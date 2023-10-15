@@ -17,6 +17,7 @@ import PrivateRoute from "./components/private-component/PrivateComponent";
 import AdminRoute from "./components/admin-component/AdminComponent";
 import EditFoodPage from "./pages/edit-food-page/EditFoodPage";
 import Alert from "./components/alert/Alert";
+import Reset_Pass from "./components/ResetPass/Reset_Pass";
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
@@ -33,6 +34,7 @@ function App() {
         <Switch>
           <PrivateRoute exact path="/" component={Homepage} />
           <Route exact path="/signin" component={SignInPage} />
+          <Route exact path="/Reset_Pass" component={Reset_Pass} />
           <Route exact path="/signup" component={SignUpPage} />
           <AdminRoute exact path="/add-food" component={AddFoodPage} />
           <PrivateRoute exact path="/food" component={FoodPage} />

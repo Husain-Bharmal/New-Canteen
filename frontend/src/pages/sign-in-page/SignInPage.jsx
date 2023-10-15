@@ -4,7 +4,6 @@ import { loginUser } from "../../redux/auth/auth.actions";
 import { Link, Redirect } from "react-router-dom";
 import { AiFillLock } from "react-icons/ai";
 // import {GoogleLogin} from "react-google-login"
-
 import "./SignInPage.css";
 
 
@@ -77,6 +76,9 @@ const SignInPage = ({ isAuthenticated, loginUser }) => {
           </form>
           <p>
             Don't have an account? <Link to="/signup">Sign Up</Link>
+          </p>
+          <p>
+            Forget Password? <Link to="/Reset_Pass">Forget Pass</Link>
           </p>
         </div>
       </div>

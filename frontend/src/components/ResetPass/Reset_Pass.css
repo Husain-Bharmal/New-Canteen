@@ -1,0 +1,77 @@
+/* Reset_Pass.css */
+
+.reset_form {
+  max-width: 400px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #ff2600;
+  border-radius: 8px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  background-color: #ecf0f1;
+}
+
+.heading {
+  text-align: center;
+  color: #ff2600;
+  font-size: 35px;
+  margin-bottom: 20px;
+}
+
+.ptag {
+  font-size: 18px;
+  color: #555;
+  width: max-content;
+  margin-top: 10px;
+}
+
+.inp {
+  width: 90%;
+  padding: 12px;
+  margin-top: 6px;
+  margin-bottom: 10px;
+  border: 2px solid #ff2600;
+  border-radius: 4px;
+  font-size: 20px;
+  background-color: #fff;
+  transition: border-color 0.3s;
+}
+
+.inp:focus {
+  border-color: #ff2600;
+}
+
+.SendOptbtn{
+  background-color: #3498db;
+  color: #fff;
+  padding: 12px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+  font-size: 20px;
+}
+
+.btn:hover {
+  background-color: #2980b9;
+}
+
+/* Additional Styling */
+
+.reset_form p {
+  margin-bottom: 10px;
+}
+
+/* Add more styles for the form elements as needed */
+
+.formpage{
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+}
+
+.Pure_reset{
+    background: url("../../assets/Singin.jpg") no-repeat ; 
+    background-size: cover;
+    height: 112vh;
+}
