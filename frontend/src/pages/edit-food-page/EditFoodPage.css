@@ -1,6 +1,7 @@
 .root {
   background: #f89e8e;
   padding-top: 80px;
+  height: 100vh;
 }
 
 .add-food-div {
