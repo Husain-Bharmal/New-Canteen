@@ -4,12 +4,11 @@ const jwt = require("jsonwebtoken");
 const { check, validationResult } = require("express-validator");
 const auth = require("../middleware/auth");
 const User = require("../models/auth.models");
-const { OAuth2Client } = require('google-auth-library')
-const nodemailer = require('nodemailer');
+const { OAuth2Client } = require("google-auth-library");
+const nodemailer = require("nodemailer");
 const { google } = require("googleapis");
-require('dotenv').config(); 
+require("dotenv").config();
 const router = express.Router();
-
 
 // signup: POST (public)
 router.post(
@@ -148,19 +147,77 @@ router.get("/me", auth, async (req, res) => {
   }
 });
 
-
 // CODE FOR SENDING MAIL TO THE USER
 const client_id = process.env.CLIENT_ID;
 const client_secret = process.env.CLIENT_SECRET;
 const redirect_uri = process.env.REDIRECT_URI;
 const gmailUser = process.env.GMAIL_USER;
-const Refresh_Token = process.env.REFRESH_TOKEN
+const Refresh_Token = process.env.REFRESH_TOKEN;
 
-const oAuth2Client = new google.auth.OAuth2(client_id, client_secret, redirect_uri )
-oAuth2Client.setCredentials({ refresh_token:Refresh_Token});
+const oAuth2Client = new google.auth.OAuth2(
+  client_id,
+  client_secret,
+  redirect_uri
+);
+oAuth2Client.setCredentials({ refresh_token: Refresh_Token });
+
+function generateEmailTemplate(otp) {
+  return `
+  <!DOCTYPE html>
+  <html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background: url('../frontend/public/template_img.webp') no-repeat center center fixed;
+        background-size: cover;
+        background-color: #f4f4f4; /* Fallback background color */
+      }
+      .container {
+        width: 100%;
+        max-width: 600px;
+        margin: 0 auto;
+        background-color: rgba(255, 255, 255, 0.7); /* Semi-transparent background color */
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+      h1 {
+        color: #333;
+      }
+      p {
+        color: #666;
+      }
+      .otp-container {
+        background-color: #007BFF;
+        color: #fff;
+        padding: 10px 20px;
+        font-weight: bold;
+        border-radius: 5px;
+        text-align: center;
+        display: inline-block;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Cosmos Canten</h1>
+      <p>OTP Verification</p>
+      <div class="otp-container">
+        <strong>${otp}</strong> <!-- Replace with your OTP -->
+      </div>
+      <p>OTP is valid for 10 minutes.</p>
+    </div>
+  </body>
+  </html>
+  `;
+}
 
 // Generate and send OTP to the user's email
-router.post('/forgot-password', async (req, res) => {
+router.post("/forgot-password", async (req, res) => {
   try {
     const { email } = req.body;
 
@@ -168,7 +225,7 @@ router.post('/forgot-password', async (req, res) => {
     const user = await User.findOne({ email });
 
     if (!user) {
-      return res.status(404).json({ message: 'User not found' });
+      return res.status(404).json({ message: "User not found" });
     }
 
     // Generate a random OTP
@@ -180,13 +237,12 @@ router.post('/forgot-password', async (req, res) => {
     user.otpTimestamp = otpTimestamp;
     await user.save();
 
-
     const accessToken = await oAuth2Client.getAccessToken();
 
     const transporter = nodemailer.createTransport({
-      service: 'gmail',
+      service: "gmail",
       auth: {
-        type: 'OAuth2',
+        type: "OAuth2",
         user: gmailUser,
         clientId: client_id,
         clientSecret: client_secret,
@@ -197,30 +253,29 @@ router.post('/forgot-password', async (req, res) => {
 
     // Send the OTP to the user's email
     const mailOptions = {
-      from: 'kjsitcanteen@gmail.com',
+      from: "kjsitcanteen@gmail.com",
       to: email,
-      subject: 'Reset Password OTP',
-      text: `Your OTP is: ${otp}`,
+      subject: "Reset Password OTP",
+      html: generateEmailTemplate(otp),
     };
 
     transporter.sendMail(mailOptions, (error) => {
       if (error) {
-        console.log('Error sending email: ' + error);
-        return res.status(500).json({ message: 'Email sending failed' });
+        console.log("Error sending email: " + error);
+        return res.status(500).json({ message: "Email sending failed" });
       } else {
         // console.log('Email sent: ' + info.response);
-        res.json({ message: 'OTP sent to your email' });
+        res.json({ message: "OTP sent to your email" });
       }
     });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: 'Internal server error' });
+    res.status(500).json({ message: "Internal server error" });
   }
 });
 
-
 // Verify OTP and reset password
-router.post('/reset-password', async (req, res) => {
+router.post("/reset-password", async (req, res) => {
   try {
     const { email, otp, newPassword } = req.body;
 
@@ -228,7 +283,7 @@ router.post('/reset-password', async (req, res) => {
     const user = await User.findOne({ email });
 
     if (!user) {
-      return res.status(404).json({ message: 'User not found' });
+      return res.status(404).json({ message: "User not found" });
     }
 
     const otpTimestamp = user.otpTimestamp;
@@ -238,10 +293,9 @@ router.post('/reset-password', async (req, res) => {
 
     // Check if the provided OTP matches the stored OTP
     if (user.otp !== otp) {
-      return res.status(400).json({ message: 'Invalid OTP' });
-    }
-    else if(timeDifference > otpExpiration){
-      return res.status(400).json({message:'otp has expired!'})
+      return res.status(400).json({ message: "Invalid OTP" });
+    } else if (timeDifference > otpExpiration) {
+      return res.status(400).json({ message: "otp has expired!" });
     }
 
     // hashing passwords
@@ -253,13 +307,11 @@ router.post('/reset-password', async (req, res) => {
     user.otp = null;
     await user.save();
 
-    res.json({ message: 'Password reset successful' });
+    res.json({ message: "Password reset successful" });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: 'Internal server error' });
+    res.status(500).json({ message: "Internal server error" });
   }
 });
-
-
 
 module.exports = router;
