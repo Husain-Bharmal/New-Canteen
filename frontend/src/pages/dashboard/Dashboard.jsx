@@ -67,7 +67,7 @@ const Dashboard = ({ getAdminORders, getMyOrders, user, loading }) => {
             </p>
           </div>
           <div className="features_btn_div">
-            {user && user.isAdmin === true && (
+            {user && user.role === "admin" && (
               <>
                 <button
                   className="features_btn"
