@@ -75,3 +75,9 @@
     background-size: cover;
     height: 112vh;
 }
+
+.RestPassPagebtn.loading {
+  cursor: not-allowed; /* Change cursor to not-allowed */
+  background-color: #ccc; /* Change background color to gray */
+  color: #666; /* Change text color to a darker gray */
+}

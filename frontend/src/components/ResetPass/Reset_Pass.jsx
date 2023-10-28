@@ -1,15 +1,18 @@
 import React, { useState } from 'react';
+import { setAlert } from '../../redux/alert/alert.actions';
+import { connect } from 'react-redux';
 import "./Reset_Pass.css"
 
-const Reset_Pass = () => {
+const Reset_Pass = (props) => {
   const [email, setEmail] = useState('');
   const [otp, setOtp] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [message, setMessage] = useState('');
   const [otpSent, setOtpSent] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleSendOTP = async () => {
+    setLoading(true);
     try {
       // Send a request to your server to generate and send OTP to the provided email
       const response = await fetch('/forgot-password', {
@@ -22,14 +25,16 @@ const Reset_Pass = () => {
 
       if (response.ok) {
         setOtpSent(true);
-        setMessage('OTP sent to your email.');
+        props.setAlert("OTP sent successfully!","success")
       } else {
         const data = await response.json();
-        setMessage(data.message);
+        props.setAlert(data.message,"danger")
       }
     } catch (error) {
       console.error(error);
-      setMessage('Failed to send OTP.');
+      props.setAlert("Failed to send OTP","danger")
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -45,14 +50,16 @@ const Reset_Pass = () => {
       });
 
       if (response.ok) {
-        setMessage('Password reset successfully.');
+        props.setAlert("Password reset succesfully!","success")
+        setEmail('')
+        setOtpSent(false);
       } else {
         const data = await response.json();
-        setMessage(data.message);
+        props.setAlert(data.message,"danger")
       }
     } catch (error) {
       console.error(error);
-      setMessage('Failed to reset password.');
+      props.setAlert("Failed to reset password","danger")
     }
   };
 
@@ -70,8 +77,14 @@ const Reset_Pass = () => {
         className='inp'
         onChange={(e) => setEmail(e.target.value)}
         />
-      {!otpSent ? (
-          <button className='RestPassPagebtn' onClick={handleSendOTP}>Get OTP</button>
+        {!otpSent ? (
+            <button
+              className={`RestPassPagebtn${loading ? ' loading' : ''}`}
+              onClick={handleSendOTP}
+              disabled={loading}
+            >
+              {loading ? 'Sending OTP...' : 'Get OTP'}
+            </button>
           ) : (
               <>
           <p className='ptag'>Enter the OTP you received via email.</p>
@@ -101,11 +114,13 @@ const Reset_Pass = () => {
           <button className='RestPassPagebtn' onClick={handleChangePassword}>Change Password</button>
         </>
       )}
-      <p className='ptag'>{message}</p>
     </div>
       </div>
       </div>
   );
 };
 
-export default Reset_Pass;
+const mapDispatchToProps = {
+  setAlert, // Add your alert action to mapDispatchToProps
+};
+export default connect(null, mapDispatchToProps)(Reset_Pass);
