@@ -2,7 +2,6 @@ import axios from "axios";
 
 import {
   SIGNUP_REQUEST,
-  SIGNUP_SUCCESS,
   SIGNUP_FAIL,
   SIGNIN_REQUEST,
   SIGNIN_SUCCESS,
@@ -51,14 +50,19 @@ export const registerUser = (formData) => async (dispatch) => {
     const res = await axios.post("/signup", formData, config);
 
     // If no errors, dispatch REGISTER_SUCCESS
-    dispatch({
-      type: SIGNUP_SUCCESS,
-      payload: res.data,
-    });
+    if(res.error){
+      dispatch({
+        type:SIGNIN_FAIL,
+      })
+    }
+      // dispatch({
+      //   type: SIGNUP_SUCCESS,
+      //   payload: res.data,
+      // });
+      // dispatch(setAlert("Created account successfully", "success"));
+    
 
-    dispatch(setAlert("Created account successfully", "success"));
-
-    dispatch(loadUser());
+    // dispatch(loadUser());
   } catch (err) {
     // Send alerts
     const errors = err.response.data.errors;
@@ -92,15 +96,25 @@ export const loginUser = (formData) => async (dispatch) => {
 
     // Make a request to backend API
     const res = await axios.post("/signin", formData, config);
+    const { data } = res;
+    // console.log(data.error)
 
-    // If no errors, dispatch LOGIN_SUCCESS
-    dispatch({
-      type: SIGNIN_SUCCESS,
-      payload: res.data,
-    });
-
-    dispatch(loadUser());
-    dispatch(setAlert("Signed In  successfully", "success"));
+    if (data.error && data.error[0].msg === "Email is not verified!") {
+      const errorMessage = data.error[0].msg; // Extract the error message
+      dispatch(setAlert(errorMessage, "danger"));
+      dispatch({
+        type: SIGNIN_FAIL,
+      });
+    }else{
+      // If no errors, dispatch LOGIN_SUCCESS
+      dispatch({
+        type: SIGNIN_SUCCESS,
+        payload: res.data,
+      });
+  
+      dispatch(loadUser());
+      dispatch(setAlert("Signed In  successfully", "success"));
+    }
   } catch (err) {
     // Send alerts
     const errors = err.response && err.response.data.errors;

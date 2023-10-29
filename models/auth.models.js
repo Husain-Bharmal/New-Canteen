@@ -32,7 +32,9 @@ const UserSchema = new Schema({
   },
   otpTimestamp:{
   type: Date,
-  }
+  },
+  emailVerificationToken: String,
+  isVerified: Boolean,
 });
 
 module.exports = mongoose.model('user', UserSchema);

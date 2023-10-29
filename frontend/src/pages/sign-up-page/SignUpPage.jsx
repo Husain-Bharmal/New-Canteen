@@ -17,7 +17,7 @@ const SignUpPage = ({ registerUser, isAuthenticated, setAlert }) => {
     branch: "",
     role: "",
   });
-
+  const [verificationEmailSent, setVerificationEmailSent] = useState(false);
   const { name, email, password, confirmPassword, branch } = formData;
 
   const onChange = (e) => {
@@ -30,94 +30,118 @@ const SignUpPage = ({ registerUser, isAuthenticated, setAlert }) => {
       setAlert("Password do not match", "danger");
     } else {
       registerUser(formData);
+      setVerificationEmailSent(true);
     }
   };
 
   if (isAuthenticated) {
     return <Redirect to="/" />;
   }
-  return (
-    <div className="Pura_signup">
 
-    <div className="root1">
-      <div className="signup-div">
-        <div className="signup-form">
-          <MdAccountCircle className="sign-up-icon" />
-          <h1>Create an account</h1>
-          <form onSubmit={onSubmit}>
-            <input
-              type="text"
-              name="name"
-              value={name}
-              onChange={onChange}
-              placeholder="Name"
-              />
-            <br></br>
-            <input
-              type="email"
-              name="email"
-              value={email}
-              onChange={onChange}
-              placeholder="Email"
-              />
-            <br />
-            <input
-              type="password"
-              name="password"
-              value={password}
-              onChange={onChange}
-              placeholder="Password"
-              />
-            <br />
-            <input
-              type="password"
-              name="confirmPassword"
-              placeholder="Confirm Password"
-              value={confirmPassword}
-              onChange={onChange}
-              />
-            <br />
-            <select name="branch" value={branch} onChange={onChange} id="cars">
-              <option value="null">Branch </option>
-              <option value="COMPUTER">Computer</option>
-              <option value="IT">IT</option>
-              <option value="EXTC">EXTC</option>
-              <option value="AIDS">AIDS</option>
-            </select>
-            <br />
 
-            <div className="role-div">
+  if(!verificationEmailSent){
+    return (
+      <div className="Pura_signup">
+  
+      <div className="root1">
+        <div className="signup-div">
+          <div className="signup-form">
+            <MdAccountCircle className="sign-up-icon" />
+            <h1>Create an account</h1>
+            <form onSubmit={onSubmit}>
               <input
-                type="radio"
-                id="teacher"
-                value="teacher"
-                onChange={() => setFormData({ ...formData, role: "teacher" })}
-                name="role"
+                type="text"
+                name="name"
+                value={name}
+                onChange={onChange}
+                placeholder="Name"
                 />
-              <label for="teacher">Teacher</label>
-
+              <br></br>
               <input
-                type="radio"
-                id="student"
-                name="role"
-                value="student"
-                onChange={() => setFormData({ ...formData, role: "student" })}
+                type="email"
+                name="email"
+                value={email}
+                onChange={onChange}
+                placeholder="Email"
                 />
-              <label for="student">Student</label>
-            </div>
-
-            <br />
-
-            <button type="submit">Submit</button>
-          </form>
-          <p>
-            Already have an account? <Link to="/signin">SignIn</Link>
-          </p>
+              <br />
+              <input
+                type="password"
+                name="password"
+                value={password}
+                onChange={onChange}
+                placeholder="Password"
+                />
+              <br />
+              <input
+                type="password"
+                name="confirmPassword"
+                placeholder="Confirm Password"
+                value={confirmPassword}
+                onChange={onChange}
+                />
+              <br />
+              <select name="branch" value={branch} onChange={onChange} id="cars">
+                <option value="null">Branch </option>
+                <option value="COMPUTER">Computer</option>
+                <option value="IT">IT</option>
+                <option value="EXTC">EXTC</option>
+                <option value="AIDS">AIDS</option>
+              </select>
+              <br />
+  
+              <div className="role-div">
+                <input
+                  type="radio"
+                  id="teacher"
+                  value="teacher"
+                  onChange={() => setFormData({ ...formData, role: "teacher" })}
+                  name="role"
+                  />
+                <label for="teacher">Teacher</label>
+  
+                <input
+                  type="radio"
+                  id="student"
+                  name="role"
+                  value="student"
+                  onChange={() => setFormData({ ...formData, role: "student" })}
+                  />
+                <label for="student">Student</label>
+              </div>
+  
+              <br />
+  
+              <button type="submit">Submit</button>
+            </form>
+            <p>
+              Already have an account? <Link to="/signin">SignIn</Link>
+            </p>
+          </div>
         </div>
       </div>
-    </div>
-</div>
-  );
+  </div>
+    );
+  } else{
+    return (
+      <div className="Pura_signup">
+        <div className="root1">
+          <div className="signup-div">
+            <div className="signup-form">
+              <MdAccountCircle className="sign-up-icon" />
+              <h1>Email Verification</h1>
+              <div className="verification-message">
+                <p>Thank you for signing up!</p>
+                <p>Please check your email for a verification link to activate your account.</p>
+                <p>If you haven't received the email, please check your spam folder.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+  
 };
 
 const mapStateToProps = (state) => ({

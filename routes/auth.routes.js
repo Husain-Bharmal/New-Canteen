@@ -7,8 +7,26 @@ const User = require("../models/auth.models");
 const { OAuth2Client } = require("google-auth-library");
 const nodemailer = require("nodemailer");
 const { google } = require("googleapis");
+const uuid = require('uuid');
+const path = require("path")
 require("dotenv").config();
 const router = express.Router();
+
+
+// CODE FOR SENDING MAIL TO THE USER
+const client_id = process.env.CLIENT_ID;
+const client_secret = process.env.CLIENT_SECRET;
+const redirect_uri = process.env.REDIRECT_URI;
+const gmailUser = process.env.GMAIL_USER;
+const Refresh_Token = process.env.REFRESH_TOKEN;
+
+const oAuth2Client = new google.auth.OAuth2(
+  client_id,
+  client_secret,
+  redirect_uri
+);
+oAuth2Client.setCredentials({ refresh_token: Refresh_Token });
+
 
 // signup: POST (public)
 router.post(
@@ -41,6 +59,9 @@ router.post(
           .json({ errors: [{ msg: "User already exists" }] });
       }
 
+      // Generate a verification token (UUID)
+      const verificationToken = uuid.v4();
+
       // hashing passwords
       const salt = await bcrypt.genSalt(12);
       const encryptedpassword = await bcrypt.hash(password, salt);
@@ -53,28 +74,100 @@ router.post(
         branch,
         role,
         isAdmin: false,
+        emailVerificationToken: verificationToken, // Store the verification token
+        isVerified: false, // Initialize as not verified
       });
       await user.save();
 
-      // jwt
-      const payload = {
-        user: {
-          id: user.id,
-        },
-      };
+      const accessToken = await oAuth2Client.getAccessToken();
 
-      jwt.sign(payload, process.env.JWT_SECRET, (err, token) => {
-        if (err) {
-          throw err;
-        }
-        res.json({ token, user });
+      const transporter = nodemailer.createTransport({
+        service: "gmail",
+        auth: {
+          type: "OAuth2",
+          user: gmailUser,
+          clientId: client_id,
+          clientSecret: client_secret,
+          refreshToken: Refresh_Token,
+          accessToken: accessToken,
+        },
       });
+      
+      const verificationLink = `http://localhost:5000/verify/${verificationToken}`
+      // Send the verification link to the user's email
+      const mailOptions = {
+        from: "kjsitcanteen@gmail.com",
+        to: email,
+        subject: "E-mail Verification",
+        html: `
+        <p>Thank you for signing up! Please click the following link to verify your email:</p>
+        <a href="${verificationLink}">Verify your E-mail</a>
+      `,
+      };
+  
+      transporter.sendMail(mailOptions, (error) => {
+        if (error) {
+          console.log("Error sending email: " + error);
+          return res.status(500).json({ message: "Email sending failed" });
+        } else {
+          // console.log('Email sent: ' + info.response);
+          res.json({ message: "Verification link sent to your email" });
+        }
+      });
+
+      // jwt
+      // const payload = {
+      //   user: {
+      //     id: user.id,
+      //   },
+      // };
+
+      // jwt.sign(payload, process.env.JWT_SECRET, (err, token) => {
+      //   if (err) {
+      //     throw err;
+      //   }
+      //   res.json({ token, user });
+      // });
     } catch (error) {
       console.log(error.message);
       res.status(500).send(error);
     }
   }
 );
+
+// Create a new route for email verification
+router.get('/verify/:token', async (req, res) => {
+  try {
+    const { token } = req.params;
+    const user = await User.findOne({ emailVerificationToken: token });
+
+    if (!user) {
+      return res.status(404).json({ message: 'Verification token is invalid or has expired.' });
+    }
+
+    if (user) {
+      // Mark the user's email as verified
+      user.isVerified = true;
+      user.emailVerificationToken = null; // Clear the token to prevent reuse
+      await user.save();
+      return res.redirect('/verified?emailVerified=true')
+
+    } else {
+      // Handle requests from other sources or without the "source" parameter
+      res.status(400).json({ message: 'Invalid request source.' });
+      return res.redirect('/verified?emailVerified=false');
+    }
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send('Internal Server Error');
+    return res.redirect('/verified?emailVerified=false');
+  }
+});
+
+router.get("/verified",(req,res)=>{
+  res.sendFile(path.join(__dirname,"../frontend/src/components/email-verified/email-verified.html"))
+});
+
 
 //signin: POST (public)
 router.post(
@@ -99,6 +192,9 @@ router.post(
         return res
           .status(400)
           .json({ errors: [{ msg: "Email does not exist" }] });
+      }
+      else if(user.isVerified==false){
+        res.json({error: [{msg:"Email is not verified!"}] });
       }
 
       // check password
@@ -147,19 +243,7 @@ router.get("/me", auth, async (req, res) => {
   }
 });
 
-// CODE FOR SENDING MAIL TO THE USER
-const client_id = process.env.CLIENT_ID;
-const client_secret = process.env.CLIENT_SECRET;
-const redirect_uri = process.env.REDIRECT_URI;
-const gmailUser = process.env.GMAIL_USER;
-const Refresh_Token = process.env.REFRESH_TOKEN;
 
-const oAuth2Client = new google.auth.OAuth2(
-  client_id,
-  client_secret,
-  redirect_uri
-);
-oAuth2Client.setCredentials({ refresh_token: Refresh_Token });
 
 function generateEmailTemplate(otp) {
   return `

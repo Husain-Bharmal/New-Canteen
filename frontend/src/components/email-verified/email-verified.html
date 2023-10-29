@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+  .verification-icon {
+    font-size: 100px;
+    margin: 20px;
+  }
+
+  .verification-message {
+    font-size: 24px;
+  }
+
+  .verified {
+    color: green;
+  }
+
+  .not-verified {
+    color: red;
+  }
+  .centre {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  .login-link {
+    text-decoration: none;
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 18px;
+  }
+</style>
+</head>
+<body>
+    <div class="centre">
+        <div class="verification-icon" id="verificationIcon"></div>
+        <div class="verification-message" id="verificationMessage"></div>
+        <a class="login-link" id="loginLink" style="display: none" href="http://localhost:3000/signin">Login</a>
+    </div>
+
+    <script>
+        // Get the email verification status from the URL parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        const isEmailVerified = urlParams.get("emailVerified");
+    
+        const verificationIcon = document.getElementById("verificationIcon");
+        const verificationMessage = document.getElementById("verificationMessage");
+        const loginLink = document.getElementById("loginLink");
+    
+        if (isEmailVerified === "true") {
+          // Email is verified
+          verificationIcon.innerHTML = "&#10004;"; // Checkmark icon
+          verificationIcon.classList.add("verified");
+          verificationMessage.textContent = "Your email has been verified";
+          loginLink.style.display = "block"; // Display the login link
+        } else {
+          // Email is not verified
+          verificationIcon.innerHTML = "&#10060;"; // Cross icon
+          verificationIcon.classList.add("not-verified");
+          verificationMessage.textContent = "Email verification failed";
+        }
+      </script>
+</body>
+</html>
