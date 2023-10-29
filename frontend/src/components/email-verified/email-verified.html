@@ -51,17 +51,17 @@
         const loginLink = document.getElementById("loginLink");
     
         if (isEmailVerified === "true") {
-          // Email is verified
-          verificationIcon.innerHTML = "&#10004;"; // Checkmark icon
-          verificationIcon.classList.add("verified");
-          verificationMessage.textContent = "Your email has been verified";
-          loginLink.style.display = "block"; // Display the login link
-        } else {
-          // Email is not verified
-          verificationIcon.innerHTML = "&#10060;"; // Cross icon
-          verificationIcon.classList.add("not-verified");
-          verificationMessage.textContent = "Email verification failed";
-        }
+    // Email is verified
+    verificationIcon.innerHTML = '<img src="../public/green_tick.gif" alt="Checkmark Icon" />';
+    verificationIcon.classList.add("verified");
+    verificationMessage.textContent = "Your email has been verified";
+    loginLink.style.display = "block"; 
+  } else {
+    // Email is not verified
+    verificationIcon.innerHTML = '<img src="../public/red-cross.gif" alt="Cross Icon" />';
+    verificationIcon.classList.add("not-verified");
+    verificationMessage.textContent = "Email verification failed";
+  }
       </script>
 </body>
 </html>

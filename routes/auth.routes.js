@@ -9,6 +9,7 @@ const nodemailer = require("nodemailer");
 const { google } = require("googleapis");
 const uuid = require('uuid');
 const path = require("path")
+const fs = require('fs')
 require("dotenv").config();
 const router = express.Router();
 
@@ -245,60 +246,60 @@ router.get("/me", auth, async (req, res) => {
 
 
 
-function generateEmailTemplate(otp) {
-  return `
-  <!DOCTYPE html>
-  <html>
-  <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-        background: url('../frontend/public/template_img.webp') no-repeat center center fixed;
-        background-size: cover;
-        background-color: #f4f4f4; /* Fallback background color */
-      }
-      .container {
-        width: 100%;
-        max-width: 600px;
-        margin: 0 auto;
-        background-color: rgba(255, 255, 255, 0.7); /* Semi-transparent background color */
-        padding: 20px;
-        border-radius: 5px;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-      }
-      h1 {
-        color: #333;
-      }
-      p {
-        color: #666;
-      }
-      .otp-container {
-        background-color: #007BFF;
-        color: #fff;
-        padding: 10px 20px;
-        font-weight: bold;
-        border-radius: 5px;
-        text-align: center;
-        display: inline-block;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="container">
-      <h1>Cosmos Canten</h1>
-      <p>OTP Verification</p>
-      <div class="otp-container">
-        <strong>${otp}</strong> <!-- Replace with your OTP -->
-      </div>
-      <p>OTP is valid for 10 minutes.</p>
-    </div>
-  </body>
-  </html>
-  `;
-}
+// function generateEmailTemplate(otp) {
+//   return `
+//   <!DOCTYPE html>
+//   <html>
+//   <head>
+//     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+//     <style>
+//       body {
+//         font-family: Arial, sans-serif;
+//         margin: 0;
+//         padding: 0;
+//         background: url('../frontend/public/template_img.webp') no-repeat center center fixed;
+//         background-size: cover;
+//         background-color: #f4f4f4; /* Fallback background color */
+//       }
+//       .container {
+//         width: 100%;
+//         max-width: 600px;
+//         margin: 0 auto;
+//         background-color: rgba(255, 255, 255, 0.7); /* Semi-transparent background color */
+//         padding: 20px;
+//         border-radius: 5px;
+//         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+//       }
+//       h1 {
+//         color: #333;
+//       }
+//       p {
+//         color: #666;
+//       }
+//       .otp-container {
+//         background-color: #007BFF;
+//         color: #fff;
+//         padding: 10px 20px;
+//         font-weight: bold;
+//         border-radius: 5px;
+//         text-align: center;
+//         display: inline-block;
+//       }
+//     </style>
+//   </head>
+//   <body>
+//     <div class="container">
+//       <h1>Cosmos Canten</h1>
+//       <p>OTP Verification</p>
+//       <div class="otp-container">
+//         <strong>${otp}</strong> <!-- Replace with your OTP -->
+//       </div>
+//       <p>OTP is valid for 10 minutes.</p>
+//     </div>
+//   </body>
+//   </html>
+//   `;
+// }
 
 // Generate and send OTP to the user's email
 router.post("/forgot-password", async (req, res) => {
@@ -335,12 +336,17 @@ router.post("/forgot-password", async (req, res) => {
       },
     });
 
+    // Read the HTML template file
+    const htmlTemplate = fs.readFileSync("frontend/src/components/email-verified/template.html", "utf-8"); 
+    // Replace placeholders with dynamic content (OTP)
+    const replacedHtml = htmlTemplate.replace("{{otp}}", otp);
+    
     // Send the OTP to the user's email
     const mailOptions = {
       from: "kjsitcanteen@gmail.com",
       to: email,
       subject: "Reset Password OTP",
-      html: generateEmailTemplate(otp),
+      html: replacedHtml,
     };
 
     transporter.sendMail(mailOptions, (error) => {
