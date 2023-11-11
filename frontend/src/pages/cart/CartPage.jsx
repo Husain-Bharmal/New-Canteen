@@ -123,12 +123,14 @@ const CartPage = ({
           </div>
         </div>
       )}
-      <div className="cart-total">
-        <h3>Total: ₹{getCartTotal(cartItems).toFixed(2)}</h3>
-        <button className="order-button" onClick={onSubmit}>
-          Place Order
-        </button>
-      </div>
+       {cartItems && cartItems.length > 0 && (
+        <div className="cart-total">
+          <h3>Total: ₹{getCartTotal(cartItems).toFixed(2)}</h3>
+          <button className="order-button" onClick={onSubmit}>
+            Place Order
+          </button>
+        </div>
+      )}
     </div>
   );
 };
